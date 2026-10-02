@@ -1,0 +1,5 @@
+target,selected_model,calibration_method,operating_threshold,justification
+CAD,Logistic Regression (Default),Uncalibrated,0.5,"Logistic Regression (Default) achieved exceptional discrimination (ROC-AUC 0.9254, PR-AUC 0.9691) with very high stability across 25 folds (std 0.038). Uncalibrated Brier score is 0.0829."
+LAD,Random Forest (Balanced),Sigmoid,0.5,Random Forest (Balanced) delivered superior Recall (0.8875) and balanced F1 (0.8297) with high ROC-AUC (0.8427). Sigmoid calibration further improved Brier score to 0.1384.
+LCX,SVM (Balanced),Sigmoid,0.45,SVM (Balanced) provided strong overall F1 (0.6235) and Sensitivity (0.6641) on imbalanced LCX target. Lowering operating threshold to 0.45 increases Sensitivity to 0.7395. Sigmoid calibration improves Brier score to 0.1837.
+RCA,Logistic Regression (Balanced),Uncalibrated,0.45,"Logistic Regression (Balanced) achieved consistent performance across 25 folds (ROC-AUC 0.7076, PR-AUC 0.5741) with balanced Recall (0.6225). Operating at threshold 0.45 optimizes Sensitivity to 0.7105 with Brier score 0.2012."
