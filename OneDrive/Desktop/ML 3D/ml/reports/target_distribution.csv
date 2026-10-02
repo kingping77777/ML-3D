@@ -1,8 +1,0 @@
-LAD,LCX,RCA,Cath,CAD
-True,True,True,True,False
-"['Stenotic', 'Normal']","['Normal', 'Stenotic']","['Stenotic', 'Normal']","['CAD', 'Normal']",
-"{'Stenotic': 177, 'Normal': 126}","{'Normal': 184, 'Stenotic': 119}","{'Normal': 189, 'Stenotic': 114}","{'CAD': 216, 'Normal': 87}",
-"{'Stenotic': 58.42, 'Normal': 41.58}","{'Normal': 60.73, 'Stenotic': 39.27}","{'Normal': 62.38, 'Stenotic': 37.62}","{'CAD': 71.29, 'Normal': 28.71}",
-0,0,0,0,
-0.0,0.0,0.0,0.0,
-,,,,Target column not found with exact name in dataset
