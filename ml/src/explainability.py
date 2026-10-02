@@ -24,14 +24,22 @@ def resolve_path(path):
 
 def fix_unpickled_imputers(transformer):
     """
-    Ensures unpickled SimpleImputer instances have _fill_dtype set across scikit-learn version mismatches.
+    Ensures unpickled SimpleImputer instances have both _fill_dtype and _fit_dtype set across scikit-learn versions (1.7 vs 1.9).
     """
+    def _patch_imputer(obj):
+        if hasattr(obj, "statistics_"):
+            if not hasattr(obj, "_fill_dtype"):
+                obj._fill_dtype = getattr(obj, "_fit_dtype", obj.statistics_.dtype)
+            if not hasattr(obj, "_fit_dtype"):
+                obj._fit_dtype = getattr(obj, "_fill_dtype", obj.statistics_.dtype)
+
     if hasattr(transformer, "transformers_"):
         for name, trans, cols in transformer.transformers_:
             if hasattr(trans, "steps"):
                 for step_name, step_obj in trans.steps:
-                    if hasattr(step_obj, "statistics_") and not hasattr(step_obj, "_fill_dtype"):
-                        step_obj._fill_dtype = step_obj.statistics_.dtype
+                    _patch_imputer(step_obj)
+            else:
+                _patch_imputer(trans)
 
 def load_final_models(artifacts_dir="ml/artifacts/final"):
     """
