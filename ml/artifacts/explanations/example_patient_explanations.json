@@ -1,0 +1,2134 @@
+{
+  "cad": {
+    "target": "CAD",
+    "model_type": "Logistic Regression (Default)",
+    "explainer_type": "LinearExplainer",
+    "calibration": "Uncalibrated",
+    "probability": 0.8648,
+    "threshold": 0.5,
+    "predicted_class": 1,
+    "shap_base_value": 2.3661,
+    "shap_sum_contributions": -0.5102,
+    "top_features": [
+      {
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -1.1554,
+        "direction": "negative contribution",
+        "rank": 1,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "TG",
+        "value": 250,
+        "shap_value": 0.8901,
+        "direction": "positive contribution",
+        "rank": 2,
+        "natural_language_summary": "'TG' (patient value: 250) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Tinversion",
+        "value": 1,
+        "shap_value": 0.804,
+        "direction": "positive contribution",
+        "rank": 3,
+        "natural_language_summary": "'Tinversion' (patient value: 1) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Dyspnea",
+        "value": "N",
+        "shap_value": 0.5548,
+        "direction": "positive contribution",
+        "rank": 4,
+        "natural_language_summary": "'Dyspnea' (patient value: N) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "VHD",
+        "value": "N",
+        "shap_value": 0.5106,
+        "direction": "positive contribution",
+        "rank": 5,
+        "natural_language_summary": "'VHD' (patient value: N) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "HB",
+        "value": 15.6,
+        "shap_value": -0.5101,
+        "direction": "negative contribution",
+        "rank": 6,
+        "natural_language_summary": "'HB' (patient value: 15.6) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Age",
+        "value": 53,
+        "shap_value": -0.4774,
+        "direction": "negative contribution",
+        "rank": 7,
+        "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "St Depression",
+        "value": 1,
+        "shap_value": 0.4219,
+        "direction": "positive contribution",
+        "rank": 8,
+        "natural_language_summary": "'St Depression' (patient value: 1) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "BP",
+        "value": 110,
+        "shap_value": -0.3847,
+        "direction": "negative contribution",
+        "rank": 9,
+        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "HTN",
+        "value": 1,
+        "shap_value": 0.3821,
+        "direction": "positive contribution",
+        "rank": 10,
+        "natural_language_summary": "'HTN' (patient value: 1) contributed positively to the model's CAD probability output."
+      }
+    ],
+    "all_features": [
+      {
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -1.1554,
+        "direction": "negative contribution",
+        "rank": 1,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "TG",
+        "value": 250,
+        "shap_value": 0.8901,
+        "direction": "positive contribution",
+        "rank": 2,
+        "natural_language_summary": "'TG' (patient value: 250) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Tinversion",
+        "value": 1,
+        "shap_value": 0.804,
+        "direction": "positive contribution",
+        "rank": 3,
+        "natural_language_summary": "'Tinversion' (patient value: 1) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Dyspnea",
+        "value": "N",
+        "shap_value": 0.5548,
+        "direction": "positive contribution",
+        "rank": 4,
+        "natural_language_summary": "'Dyspnea' (patient value: N) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "VHD",
+        "value": "N",
+        "shap_value": 0.5106,
+        "direction": "positive contribution",
+        "rank": 5,
+        "natural_language_summary": "'VHD' (patient value: N) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "HB",
+        "value": 15.6,
+        "shap_value": -0.5101,
+        "direction": "negative contribution",
+        "rank": 6,
+        "natural_language_summary": "'HB' (patient value: 15.6) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Age",
+        "value": 53,
+        "shap_value": -0.4774,
+        "direction": "negative contribution",
+        "rank": 7,
+        "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "St Depression",
+        "value": 1,
+        "shap_value": 0.4219,
+        "direction": "positive contribution",
+        "rank": 8,
+        "natural_language_summary": "'St Depression' (patient value: 1) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "BP",
+        "value": 110,
+        "shap_value": -0.3847,
+        "direction": "negative contribution",
+        "rank": 9,
+        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "HTN",
+        "value": 1,
+        "shap_value": 0.3821,
+        "direction": "positive contribution",
+        "rank": 10,
+        "natural_language_summary": "'HTN' (patient value: 1) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Region RWMA",
+        "value": 0,
+        "shap_value": -0.3723,
+        "direction": "negative contribution",
+        "rank": 11,
+        "natural_language_summary": "'Region RWMA' (patient value: 0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Weight",
+        "value": 90,
+        "shap_value": 0.3445,
+        "direction": "positive contribution",
+        "rank": 12,
+        "natural_language_summary": "'Weight' (patient value: 90) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Sex",
+        "value": "Male",
+        "shap_value": 0.3334,
+        "direction": "positive contribution",
+        "rank": 13,
+        "natural_language_summary": "'Sex' (patient value: Male) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "ESR",
+        "value": 7,
+        "shap_value": -0.3332,
+        "direction": "negative contribution",
+        "rank": 14,
+        "natural_language_summary": "'ESR' (patient value: 7) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "DM",
+        "value": 0,
+        "shap_value": -0.3259,
+        "direction": "negative contribution",
+        "rank": 15,
+        "natural_language_summary": "'DM' (patient value: 0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "LDL",
+        "value": 155,
+        "shap_value": -0.2663,
+        "direction": "negative contribution",
+        "rank": 16,
+        "natural_language_summary": "'LDL' (patient value: 155) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "EF-TTE",
+        "value": 50,
+        "shap_value": -0.2638,
+        "direction": "negative contribution",
+        "rank": 17,
+        "natural_language_summary": "'EF-TTE' (patient value: 50) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "BMI",
+        "value": 29.387755102040817,
+        "shap_value": -0.259,
+        "direction": "negative contribution",
+        "rank": 18,
+        "natural_language_summary": "'BMI' (patient value: 29.387755102040817) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "FH",
+        "value": 0,
+        "shap_value": -0.2527,
+        "direction": "negative contribution",
+        "rank": 19,
+        "natural_language_summary": "'FH' (patient value: 0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Length",
+        "value": 175,
+        "shap_value": -0.223,
+        "direction": "negative contribution",
+        "rank": 20,
+        "natural_language_summary": "'Length' (patient value: 175) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Atypical",
+        "value": "N",
+        "shap_value": 0.2129,
+        "direction": "positive contribution",
+        "rank": 21,
+        "natural_language_summary": "'Atypical' (patient value: N) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "PR",
+        "value": 80,
+        "shap_value": 0.2123,
+        "direction": "positive contribution",
+        "rank": 22,
+        "natural_language_summary": "'PR' (patient value: 80) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Current Smoker",
+        "value": 1,
+        "shap_value": 0.2123,
+        "direction": "positive contribution",
+        "rank": 23,
+        "natural_language_summary": "'Current Smoker' (patient value: 1) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Function Class",
+        "value": 0,
+        "shap_value": -0.17,
+        "direction": "negative contribution",
+        "rank": 24,
+        "natural_language_summary": "'Function Class' (patient value: 0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "DLP",
+        "value": "Y",
+        "shap_value": -0.1649,
+        "direction": "negative contribution",
+        "rank": 25,
+        "natural_language_summary": "'DLP' (patient value: Y) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "K",
+        "value": 4.7,
+        "shap_value": 0.1636,
+        "direction": "positive contribution",
+        "rank": 26,
+        "natural_language_summary": "'K' (patient value: 4.7) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "CR",
+        "value": 0.7,
+        "shap_value": -0.1501,
+        "direction": "negative contribution",
+        "rank": 27,
+        "natural_language_summary": "'CR' (patient value: 0.7) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "BUN",
+        "value": 8,
+        "shap_value": 0.1348,
+        "direction": "positive contribution",
+        "rank": 28,
+        "natural_language_summary": "'BUN' (patient value: 8) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "HDL",
+        "value": 30.0,
+        "shap_value": -0.129,
+        "direction": "negative contribution",
+        "rank": 29,
+        "natural_language_summary": "'HDL' (patient value: 30.0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Obesity",
+        "value": "Y",
+        "shap_value": 0.1241,
+        "direction": "positive contribution",
+        "rank": 30,
+        "natural_language_summary": "'Obesity' (patient value: Y) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "FBS",
+        "value": 90,
+        "shap_value": -0.1191,
+        "direction": "negative contribution",
+        "rank": 31,
+        "natural_language_summary": "'FBS' (patient value: 90) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Nonanginal",
+        "value": "N",
+        "shap_value": 0.087,
+        "direction": "positive contribution",
+        "rank": 32,
+        "natural_language_summary": "'Nonanginal' (patient value: N) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "LVH",
+        "value": "N",
+        "shap_value": -0.0762,
+        "direction": "negative contribution",
+        "rank": 33,
+        "natural_language_summary": "'LVH' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "PLT",
+        "value": 261,
+        "shap_value": -0.0635,
+        "direction": "negative contribution",
+        "rank": 34,
+        "natural_language_summary": "'PLT' (patient value: 261) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "St Elevation",
+        "value": 0,
+        "shap_value": -0.0486,
+        "direction": "negative contribution",
+        "rank": 35,
+        "natural_language_summary": "'St Elevation' (patient value: 0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Airway disease",
+        "value": "N",
+        "shap_value": -0.0401,
+        "direction": "negative contribution",
+        "rank": 36,
+        "natural_language_summary": "'Airway disease' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Lymph",
+        "value": 39,
+        "shap_value": -0.0399,
+        "direction": "negative contribution",
+        "rank": 37,
+        "natural_language_summary": "'Lymph' (patient value: 39) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Q Wave",
+        "value": 0,
+        "shap_value": -0.0388,
+        "direction": "negative contribution",
+        "rank": 38,
+        "natural_language_summary": "'Q Wave' (patient value: 0) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Lung rales",
+        "value": "N",
+        "shap_value": -0.0366,
+        "direction": "negative contribution",
+        "rank": 39,
+        "natural_language_summary": "'Lung rales' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "BBB",
+        "value": "N",
+        "shap_value": 0.0353,
+        "direction": "positive contribution",
+        "rank": 40,
+        "natural_language_summary": "'BBB' (patient value: N) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "WBC",
+        "value": 5700,
+        "shap_value": -0.0202,
+        "direction": "negative contribution",
+        "rank": 41,
+        "natural_language_summary": "'WBC' (patient value: 5700) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Edema",
+        "value": 0,
+        "shap_value": 0.0135,
+        "direction": "positive contribution",
+        "rank": 42,
+        "natural_language_summary": "'Edema' (patient value: 0) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Poor R Progression",
+        "value": "N",
+        "shap_value": -0.0122,
+        "direction": "negative contribution",
+        "rank": 43,
+        "natural_language_summary": "'Poor R Progression' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Diastolic Murmur",
+        "value": "N",
+        "shap_value": 0.012,
+        "direction": "positive contribution",
+        "rank": 44,
+        "natural_language_summary": "'Diastolic Murmur' (patient value: N) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "Neut",
+        "value": 52,
+        "shap_value": -0.0097,
+        "direction": "negative contribution",
+        "rank": 45,
+        "natural_language_summary": "'Neut' (patient value: 52) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Systolic Murmur",
+        "value": "N",
+        "shap_value": -0.0065,
+        "direction": "negative contribution",
+        "rank": 46,
+        "natural_language_summary": "'Systolic Murmur' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Weak Peripheral Pulse",
+        "value": "N",
+        "shap_value": -0.0058,
+        "direction": "negative contribution",
+        "rank": 47,
+        "natural_language_summary": "'Weak Peripheral Pulse' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "EX-Smoker",
+        "value": 0,
+        "shap_value": 0.0053,
+        "direction": "positive contribution",
+        "rank": 48,
+        "natural_language_summary": "'EX-Smoker' (patient value: 0) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "CRF",
+        "value": "N",
+        "shap_value": -0.0039,
+        "direction": "negative contribution",
+        "rank": 49,
+        "natural_language_summary": "'CRF' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "CVA",
+        "value": "N",
+        "shap_value": -0.0029,
+        "direction": "negative contribution",
+        "rank": 50,
+        "natural_language_summary": "'CVA' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Thyroid Disease",
+        "value": "N",
+        "shap_value": -0.0028,
+        "direction": "negative contribution",
+        "rank": 51,
+        "natural_language_summary": "'Thyroid Disease' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "CHF",
+        "value": "N",
+        "shap_value": -0.001,
+        "direction": "negative contribution",
+        "rank": 52,
+        "natural_language_summary": "'CHF' (patient value: N) contributed negatively to the model's CAD probability output."
+      },
+      {
+        "feature": "Na",
+        "value": 141,
+        "shap_value": 0.0009,
+        "direction": "positive contribution",
+        "rank": 53,
+        "natural_language_summary": "'Na' (patient value: 141) contributed positively to the model's CAD probability output."
+      },
+      {
+        "feature": "LowTH Ang",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 54,
+        "natural_language_summary": "'LowTH Ang' (patient value: N) contributed positively to the model's CAD probability output."
+      }
+    ],
+    "consistency_check": {
+      "space": "Model decision space (log-odds / margin for linear & tree models, probability for kernel)",
+      "base_value": 2.3661,
+      "sum_shap": -0.5102,
+      "reconstructed_output": 1.8559
+    }
+  },
+  "lad": {
+    "target": "LAD",
+    "model_type": "Random Forest (Balanced)",
+    "explainer_type": "TreeExplainer",
+    "calibration": "Calibrated (sigmoid)",
+    "probability": 0.7761,
+    "threshold": 0.5,
+    "predicted_class": 1,
+    "shap_base_value": 0.4991,
+    "shap_sum_contributions": -0.0092,
+    "top_features": [
+      {
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -0.0723,
+        "direction": "negative contribution",
+        "rank": 1,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Atypical",
+        "value": "N",
+        "shap_value": 0.0495,
+        "direction": "positive contribution",
+        "rank": 2,
+        "natural_language_summary": "'Atypical' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "LDL",
+        "value": 155,
+        "shap_value": 0.0339,
+        "direction": "positive contribution",
+        "rank": 3,
+        "natural_language_summary": "'LDL' (patient value: 155) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "PR",
+        "value": 80,
+        "shap_value": 0.0313,
+        "direction": "positive contribution",
+        "rank": 4,
+        "natural_language_summary": "'PR' (patient value: 80) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Age",
+        "value": 53,
+        "shap_value": -0.0289,
+        "direction": "negative contribution",
+        "rank": 5,
+        "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Region RWMA",
+        "value": 0,
+        "shap_value": -0.0285,
+        "direction": "negative contribution",
+        "rank": 6,
+        "natural_language_summary": "'Region RWMA' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Weight",
+        "value": 90,
+        "shap_value": -0.0255,
+        "direction": "negative contribution",
+        "rank": 7,
+        "natural_language_summary": "'Weight' (patient value: 90) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "ESR",
+        "value": 7,
+        "shap_value": -0.0188,
+        "direction": "negative contribution",
+        "rank": 8,
+        "natural_language_summary": "'ESR' (patient value: 7) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "TG",
+        "value": 250,
+        "shap_value": 0.0182,
+        "direction": "positive contribution",
+        "rank": 9,
+        "natural_language_summary": "'TG' (patient value: 250) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "WBC",
+        "value": 5700,
+        "shap_value": -0.0169,
+        "direction": "negative contribution",
+        "rank": 10,
+        "natural_language_summary": "'WBC' (patient value: 5700) contributed negatively to the model's LAD probability output."
+      }
+    ],
+    "all_features": [
+      {
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -0.0723,
+        "direction": "negative contribution",
+        "rank": 1,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Atypical",
+        "value": "N",
+        "shap_value": 0.0495,
+        "direction": "positive contribution",
+        "rank": 2,
+        "natural_language_summary": "'Atypical' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "LDL",
+        "value": 155,
+        "shap_value": 0.0339,
+        "direction": "positive contribution",
+        "rank": 3,
+        "natural_language_summary": "'LDL' (patient value: 155) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "PR",
+        "value": 80,
+        "shap_value": 0.0313,
+        "direction": "positive contribution",
+        "rank": 4,
+        "natural_language_summary": "'PR' (patient value: 80) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Age",
+        "value": 53,
+        "shap_value": -0.0289,
+        "direction": "negative contribution",
+        "rank": 5,
+        "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Region RWMA",
+        "value": 0,
+        "shap_value": -0.0285,
+        "direction": "negative contribution",
+        "rank": 6,
+        "natural_language_summary": "'Region RWMA' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Weight",
+        "value": 90,
+        "shap_value": -0.0255,
+        "direction": "negative contribution",
+        "rank": 7,
+        "natural_language_summary": "'Weight' (patient value: 90) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "ESR",
+        "value": 7,
+        "shap_value": -0.0188,
+        "direction": "negative contribution",
+        "rank": 8,
+        "natural_language_summary": "'ESR' (patient value: 7) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "TG",
+        "value": 250,
+        "shap_value": 0.0182,
+        "direction": "positive contribution",
+        "rank": 9,
+        "natural_language_summary": "'TG' (patient value: 250) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "WBC",
+        "value": 5700,
+        "shap_value": -0.0169,
+        "direction": "negative contribution",
+        "rank": 10,
+        "natural_language_summary": "'WBC' (patient value: 5700) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Tinversion",
+        "value": 1,
+        "shap_value": 0.0169,
+        "direction": "positive contribution",
+        "rank": 11,
+        "natural_language_summary": "'Tinversion' (patient value: 1) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "HTN",
+        "value": 1,
+        "shap_value": 0.0152,
+        "direction": "positive contribution",
+        "rank": 12,
+        "natural_language_summary": "'HTN' (patient value: 1) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "St Depression",
+        "value": 1,
+        "shap_value": 0.0136,
+        "direction": "positive contribution",
+        "rank": 13,
+        "natural_language_summary": "'St Depression' (patient value: 1) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Current Smoker",
+        "value": 1,
+        "shap_value": 0.0109,
+        "direction": "positive contribution",
+        "rank": 14,
+        "natural_language_summary": "'Current Smoker' (patient value: 1) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "BP",
+        "value": 110,
+        "shap_value": -0.0096,
+        "direction": "negative contribution",
+        "rank": 15,
+        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Lymph",
+        "value": 39,
+        "shap_value": -0.0085,
+        "direction": "negative contribution",
+        "rank": 16,
+        "natural_language_summary": "'Lymph' (patient value: 39) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Sex",
+        "value": "Male",
+        "shap_value": 0.0084,
+        "direction": "positive contribution",
+        "rank": 17,
+        "natural_language_summary": "'Sex' (patient value: Male) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "HB",
+        "value": 15.6,
+        "shap_value": -0.0084,
+        "direction": "negative contribution",
+        "rank": 18,
+        "natural_language_summary": "'HB' (patient value: 15.6) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "PLT",
+        "value": 261,
+        "shap_value": 0.0075,
+        "direction": "positive contribution",
+        "rank": 19,
+        "natural_language_summary": "'PLT' (patient value: 261) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Na",
+        "value": 141,
+        "shap_value": 0.0073,
+        "direction": "positive contribution",
+        "rank": 20,
+        "natural_language_summary": "'Na' (patient value: 141) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Dyspnea",
+        "value": "N",
+        "shap_value": 0.0072,
+        "direction": "positive contribution",
+        "rank": 21,
+        "natural_language_summary": "'Dyspnea' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Nonanginal",
+        "value": "N",
+        "shap_value": 0.0068,
+        "direction": "positive contribution",
+        "rank": 22,
+        "natural_language_summary": "'Nonanginal' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "FBS",
+        "value": 90,
+        "shap_value": -0.0058,
+        "direction": "negative contribution",
+        "rank": 23,
+        "natural_language_summary": "'FBS' (patient value: 90) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "HDL",
+        "value": 30.0,
+        "shap_value": 0.0045,
+        "direction": "positive contribution",
+        "rank": 24,
+        "natural_language_summary": "'HDL' (patient value: 30.0) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "DM",
+        "value": 0,
+        "shap_value": -0.0035,
+        "direction": "negative contribution",
+        "rank": 25,
+        "natural_language_summary": "'DM' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Function Class",
+        "value": 0,
+        "shap_value": -0.0034,
+        "direction": "negative contribution",
+        "rank": 26,
+        "natural_language_summary": "'Function Class' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "BMI",
+        "value": 29.387755102040817,
+        "shap_value": -0.0025,
+        "direction": "negative contribution",
+        "rank": 27,
+        "natural_language_summary": "'BMI' (patient value: 29.387755102040817) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Obesity",
+        "value": "Y",
+        "shap_value": -0.0024,
+        "direction": "negative contribution",
+        "rank": 28,
+        "natural_language_summary": "'Obesity' (patient value: Y) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Neut",
+        "value": 52,
+        "shap_value": -0.0019,
+        "direction": "negative contribution",
+        "rank": 29,
+        "natural_language_summary": "'Neut' (patient value: 52) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Systolic Murmur",
+        "value": "N",
+        "shap_value": -0.0017,
+        "direction": "negative contribution",
+        "rank": 30,
+        "natural_language_summary": "'Systolic Murmur' (patient value: N) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Length",
+        "value": 175,
+        "shap_value": -0.0017,
+        "direction": "negative contribution",
+        "rank": 31,
+        "natural_language_summary": "'Length' (patient value: 175) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "EF-TTE",
+        "value": 50,
+        "shap_value": 0.0016,
+        "direction": "positive contribution",
+        "rank": 32,
+        "natural_language_summary": "'EF-TTE' (patient value: 50) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "St Elevation",
+        "value": 0,
+        "shap_value": -0.0015,
+        "direction": "negative contribution",
+        "rank": 33,
+        "natural_language_summary": "'St Elevation' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "BBB",
+        "value": "N",
+        "shap_value": 0.0014,
+        "direction": "positive contribution",
+        "rank": 34,
+        "natural_language_summary": "'BBB' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "CR",
+        "value": 0.7,
+        "shap_value": -0.0013,
+        "direction": "negative contribution",
+        "rank": 35,
+        "natural_language_summary": "'CR' (patient value: 0.7) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Poor R Progression",
+        "value": "N",
+        "shap_value": -0.001,
+        "direction": "negative contribution",
+        "rank": 36,
+        "natural_language_summary": "'Poor R Progression' (patient value: N) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "CVA",
+        "value": "N",
+        "shap_value": 0.0007,
+        "direction": "positive contribution",
+        "rank": 37,
+        "natural_language_summary": "'CVA' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "DLP",
+        "value": "Y",
+        "shap_value": 0.0006,
+        "direction": "positive contribution",
+        "rank": 38,
+        "natural_language_summary": "'DLP' (patient value: Y) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Q Wave",
+        "value": 0,
+        "shap_value": -0.0006,
+        "direction": "negative contribution",
+        "rank": 39,
+        "natural_language_summary": "'Q Wave' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Thyroid Disease",
+        "value": "N",
+        "shap_value": 0.0006,
+        "direction": "positive contribution",
+        "rank": 40,
+        "natural_language_summary": "'Thyroid Disease' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "VHD",
+        "value": "N",
+        "shap_value": -0.0005,
+        "direction": "negative contribution",
+        "rank": 41,
+        "natural_language_summary": "'VHD' (patient value: N) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "K",
+        "value": 4.7,
+        "shap_value": 0.0005,
+        "direction": "positive contribution",
+        "rank": 42,
+        "natural_language_summary": "'K' (patient value: 4.7) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Lung rales",
+        "value": "N",
+        "shap_value": -0.0005,
+        "direction": "negative contribution",
+        "rank": 43,
+        "natural_language_summary": "'Lung rales' (patient value: N) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "CRF",
+        "value": "N",
+        "shap_value": -0.0005,
+        "direction": "negative contribution",
+        "rank": 44,
+        "natural_language_summary": "'CRF' (patient value: N) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "BUN",
+        "value": 8,
+        "shap_value": 0.0004,
+        "direction": "positive contribution",
+        "rank": 45,
+        "natural_language_summary": "'BUN' (patient value: 8) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Edema",
+        "value": 0,
+        "shap_value": -0.0004,
+        "direction": "negative contribution",
+        "rank": 46,
+        "natural_language_summary": "'Edema' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "EX-Smoker",
+        "value": 0,
+        "shap_value": -0.0003,
+        "direction": "negative contribution",
+        "rank": 47,
+        "natural_language_summary": "'EX-Smoker' (patient value: 0) contributed negatively to the model's LAD probability output."
+      },
+      {
+        "feature": "Diastolic Murmur",
+        "value": "N",
+        "shap_value": 0.0002,
+        "direction": "positive contribution",
+        "rank": 48,
+        "natural_language_summary": "'Diastolic Murmur' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "FH",
+        "value": 0,
+        "shap_value": 0.0002,
+        "direction": "positive contribution",
+        "rank": 49,
+        "natural_language_summary": "'FH' (patient value: 0) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Weak Peripheral Pulse",
+        "value": "N",
+        "shap_value": 0.0001,
+        "direction": "positive contribution",
+        "rank": 50,
+        "natural_language_summary": "'Weak Peripheral Pulse' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "LVH",
+        "value": "N",
+        "shap_value": 0.0001,
+        "direction": "positive contribution",
+        "rank": 51,
+        "natural_language_summary": "'LVH' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "Airway disease",
+        "value": "N",
+        "shap_value": 0.0001,
+        "direction": "positive contribution",
+        "rank": 52,
+        "natural_language_summary": "'Airway disease' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "CHF",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 53,
+        "natural_language_summary": "'CHF' (patient value: N) contributed positively to the model's LAD probability output."
+      },
+      {
+        "feature": "LowTH Ang",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 54,
+        "natural_language_summary": "'LowTH Ang' (patient value: N) contributed positively to the model's LAD probability output."
+      }
+    ],
+    "consistency_check": {
+      "space": "Model decision space (log-odds / margin for linear & tree models, probability for kernel)",
+      "base_value": 0.4991,
+      "sum_shap": -0.0092,
+      "reconstructed_output": 0.4899
+    }
+  },
+  "lcx": {
+    "target": "LCX",
+    "model_type": "SVM (Balanced)",
+    "explainer_type": "KernelExplainer",
+    "calibration": "Calibrated (sigmoid)",
+    "probability": 0.2289,
+    "threshold": 0.45,
+    "predicted_class": 0,
+    "shap_base_value": 0.3654,
+    "shap_sum_contributions": -0.0516,
+    "top_features": [
+      {
+        "feature": "Age",
+        "value": 53,
+        "shap_value": -0.0554,
+        "direction": "negative contribution",
+        "rank": 1,
+        "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "LDL",
+        "value": 155,
+        "shap_value": 0.0478,
+        "direction": "positive contribution",
+        "rank": 2,
+        "natural_language_summary": "'LDL' (patient value: 155) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Current Smoker",
+        "value": 1,
+        "shap_value": 0.0351,
+        "direction": "positive contribution",
+        "rank": 3,
+        "natural_language_summary": "'Current Smoker' (patient value: 1) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "K",
+        "value": 4.7,
+        "shap_value": 0.0277,
+        "direction": "positive contribution",
+        "rank": 4,
+        "natural_language_summary": "'K' (patient value: 4.7) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -0.0231,
+        "direction": "negative contribution",
+        "rank": 5,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "Weight",
+        "value": 90,
+        "shap_value": -0.0225,
+        "direction": "negative contribution",
+        "rank": 6,
+        "natural_language_summary": "'Weight' (patient value: 90) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "BP",
+        "value": 110,
+        "shap_value": -0.0192,
+        "direction": "negative contribution",
+        "rank": 7,
+        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "PLT",
+        "value": 261,
+        "shap_value": -0.0181,
+        "direction": "negative contribution",
+        "rank": 8,
+        "natural_language_summary": "'PLT' (patient value: 261) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "FBS",
+        "value": 90,
+        "shap_value": -0.0129,
+        "direction": "negative contribution",
+        "rank": 9,
+        "natural_language_summary": "'FBS' (patient value: 90) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "Neut",
+        "value": 52,
+        "shap_value": -0.011,
+        "direction": "negative contribution",
+        "rank": 10,
+        "natural_language_summary": "'Neut' (patient value: 52) contributed negatively to the model's LCX probability output."
+      }
+    ],
+    "all_features": [
+      {
+        "feature": "Age",
+        "value": 53,
+        "shap_value": -0.0554,
+        "direction": "negative contribution",
+        "rank": 1,
+        "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "LDL",
+        "value": 155,
+        "shap_value": 0.0478,
+        "direction": "positive contribution",
+        "rank": 2,
+        "natural_language_summary": "'LDL' (patient value: 155) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Current Smoker",
+        "value": 1,
+        "shap_value": 0.0351,
+        "direction": "positive contribution",
+        "rank": 3,
+        "natural_language_summary": "'Current Smoker' (patient value: 1) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "K",
+        "value": 4.7,
+        "shap_value": 0.0277,
+        "direction": "positive contribution",
+        "rank": 4,
+        "natural_language_summary": "'K' (patient value: 4.7) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -0.0231,
+        "direction": "negative contribution",
+        "rank": 5,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "Weight",
+        "value": 90,
+        "shap_value": -0.0225,
+        "direction": "negative contribution",
+        "rank": 6,
+        "natural_language_summary": "'Weight' (patient value: 90) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "BP",
+        "value": 110,
+        "shap_value": -0.0192,
+        "direction": "negative contribution",
+        "rank": 7,
+        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "PLT",
+        "value": 261,
+        "shap_value": -0.0181,
+        "direction": "negative contribution",
+        "rank": 8,
+        "natural_language_summary": "'PLT' (patient value: 261) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "FBS",
+        "value": 90,
+        "shap_value": -0.0129,
+        "direction": "negative contribution",
+        "rank": 9,
+        "natural_language_summary": "'FBS' (patient value: 90) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "Neut",
+        "value": 52,
+        "shap_value": -0.011,
+        "direction": "negative contribution",
+        "rank": 10,
+        "natural_language_summary": "'Neut' (patient value: 52) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "Length",
+        "value": 175,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 11,
+        "natural_language_summary": "'Length' (patient value: 175) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "BMI",
+        "value": 29.387755102040817,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 12,
+        "natural_language_summary": "'BMI' (patient value: 29.387755102040817) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "PR",
+        "value": 80,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 13,
+        "natural_language_summary": "'PR' (patient value: 80) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "CR",
+        "value": 0.7,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 14,
+        "natural_language_summary": "'CR' (patient value: 0.7) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "TG",
+        "value": 250,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 15,
+        "natural_language_summary": "'TG' (patient value: 250) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "HDL",
+        "value": 30.0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 16,
+        "natural_language_summary": "'HDL' (patient value: 30.0) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "BUN",
+        "value": 8,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 17,
+        "natural_language_summary": "'BUN' (patient value: 8) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "ESR",
+        "value": 7,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 18,
+        "natural_language_summary": "'ESR' (patient value: 7) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "HB",
+        "value": 15.6,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 19,
+        "natural_language_summary": "'HB' (patient value: 15.6) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Na",
+        "value": 141,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 20,
+        "natural_language_summary": "'Na' (patient value: 141) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "WBC",
+        "value": 5700,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 21,
+        "natural_language_summary": "'WBC' (patient value: 5700) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Lymph",
+        "value": 39,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 22,
+        "natural_language_summary": "'Lymph' (patient value: 39) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "EF-TTE",
+        "value": 50,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 23,
+        "natural_language_summary": "'EF-TTE' (patient value: 50) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Sex",
+        "value": "Male",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 24,
+        "natural_language_summary": "'Sex' (patient value: Male) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Obesity",
+        "value": "Y",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 25,
+        "natural_language_summary": "'Obesity' (patient value: Y) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "CRF",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 26,
+        "natural_language_summary": "'CRF' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "CVA",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 27,
+        "natural_language_summary": "'CVA' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Airway disease",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 28,
+        "natural_language_summary": "'Airway disease' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Thyroid Disease",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 29,
+        "natural_language_summary": "'Thyroid Disease' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "CHF",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 30,
+        "natural_language_summary": "'CHF' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "DLP",
+        "value": "Y",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 31,
+        "natural_language_summary": "'DLP' (patient value: Y) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Weak Peripheral Pulse",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 32,
+        "natural_language_summary": "'Weak Peripheral Pulse' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Lung rales",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 33,
+        "natural_language_summary": "'Lung rales' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Systolic Murmur",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 34,
+        "natural_language_summary": "'Systolic Murmur' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Diastolic Murmur",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 35,
+        "natural_language_summary": "'Diastolic Murmur' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Dyspnea",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 36,
+        "natural_language_summary": "'Dyspnea' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Function Class",
+        "value": 0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 37,
+        "natural_language_summary": "'Function Class' (patient value: 0) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Atypical",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 38,
+        "natural_language_summary": "'Atypical' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Nonanginal",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 39,
+        "natural_language_summary": "'Nonanginal' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "LowTH Ang",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 40,
+        "natural_language_summary": "'LowTH Ang' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "LVH",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 41,
+        "natural_language_summary": "'LVH' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Poor R Progression",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 42,
+        "natural_language_summary": "'Poor R Progression' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "BBB",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 43,
+        "natural_language_summary": "'BBB' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "VHD",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 44,
+        "natural_language_summary": "'VHD' (patient value: N) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "DM",
+        "value": 0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 45,
+        "natural_language_summary": "'DM' (patient value: 0) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "HTN",
+        "value": 1,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 46,
+        "natural_language_summary": "'HTN' (patient value: 1) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "EX-Smoker",
+        "value": 0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 47,
+        "natural_language_summary": "'EX-Smoker' (patient value: 0) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "FH",
+        "value": 0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 48,
+        "natural_language_summary": "'FH' (patient value: 0) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Edema",
+        "value": 0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 49,
+        "natural_language_summary": "'Edema' (patient value: 0) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Q Wave",
+        "value": 0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 50,
+        "natural_language_summary": "'Q Wave' (patient value: 0) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "St Elevation",
+        "value": 0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 51,
+        "natural_language_summary": "'St Elevation' (patient value: 0) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "St Depression",
+        "value": 1,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 52,
+        "natural_language_summary": "'St Depression' (patient value: 1) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Tinversion",
+        "value": 1,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 53,
+        "natural_language_summary": "'Tinversion' (patient value: 1) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Region RWMA",
+        "value": 0,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 54,
+        "natural_language_summary": "'Region RWMA' (patient value: 0) contributed positively to the model's LCX probability output."
+      }
+    ],
+    "consistency_check": {
+      "space": "Model decision space (log-odds / margin for linear & tree models, probability for kernel)",
+      "base_value": 0.3654,
+      "sum_shap": -0.0516,
+      "reconstructed_output": 0.3138
+    }
+  },
+  "rca": {
+    "target": "RCA",
+    "model_type": "Logistic Regression (Balanced)",
+    "explainer_type": "LinearExplainer",
+    "calibration": "Uncalibrated",
+    "probability": 0.4661,
+    "threshold": 0.45,
+    "predicted_class": 1,
+    "shap_base_value": -0.4183,
+    "shap_sum_contributions": 0.2823,
+    "top_features": [
+      {
+        "feature": "Weight",
+        "value": 90,
+        "shap_value": 0.6711,
+        "direction": "positive contribution",
+        "rank": 1,
+        "natural_language_summary": "'Weight' (patient value: 90) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "BUN",
+        "value": 8,
+        "shap_value": 0.6191,
+        "direction": "positive contribution",
+        "rank": 2,
+        "natural_language_summary": "'BUN' (patient value: 8) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Sex",
+        "value": "Male",
+        "shap_value": 0.4949,
+        "direction": "positive contribution",
+        "rank": 3,
+        "natural_language_summary": "'Sex' (patient value: Male) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "TG",
+        "value": 250,
+        "shap_value": 0.46,
+        "direction": "positive contribution",
+        "rank": 4,
+        "natural_language_summary": "'TG' (patient value: 250) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "ESR",
+        "value": 7,
+        "shap_value": -0.4351,
+        "direction": "negative contribution",
+        "rank": 5,
+        "natural_language_summary": "'ESR' (patient value: 7) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "DM",
+        "value": 0,
+        "shap_value": -0.4198,
+        "direction": "negative contribution",
+        "rank": 6,
+        "natural_language_summary": "'DM' (patient value: 0) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Dyspnea",
+        "value": "N",
+        "shap_value": 0.4158,
+        "direction": "positive contribution",
+        "rank": 7,
+        "natural_language_summary": "'Dyspnea' (patient value: N) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "CR",
+        "value": 0.7,
+        "shap_value": -0.3767,
+        "direction": "negative contribution",
+        "rank": 8,
+        "natural_language_summary": "'CR' (patient value: 0.7) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Length",
+        "value": 175,
+        "shap_value": -0.3617,
+        "direction": "negative contribution",
+        "rank": 9,
+        "natural_language_summary": "'Length' (patient value: 175) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Age",
+        "value": 53,
+        "shap_value": -0.3598,
+        "direction": "negative contribution",
+        "rank": 10,
+        "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's RCA probability output."
+      }
+    ],
+    "all_features": [
+      {
+        "feature": "Weight",
+        "value": 90,
+        "shap_value": 0.6711,
+        "direction": "positive contribution",
+        "rank": 1,
+        "natural_language_summary": "'Weight' (patient value: 90) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "BUN",
+        "value": 8,
+        "shap_value": 0.6191,
+        "direction": "positive contribution",
+        "rank": 2,
+        "natural_language_summary": "'BUN' (patient value: 8) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Sex",
+        "value": "Male",
+        "shap_value": 0.4949,
+        "direction": "positive contribution",
+        "rank": 3,
+        "natural_language_summary": "'Sex' (patient value: Male) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "TG",
+        "value": 250,
+        "shap_value": 0.46,
+        "direction": "positive contribution",
+        "rank": 4,
+        "natural_language_summary": "'TG' (patient value: 250) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "ESR",
+        "value": 7,
+        "shap_value": -0.4351,
+        "direction": "negative contribution",
+        "rank": 5,
+        "natural_language_summary": "'ESR' (patient value: 7) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "DM",
+        "value": 0,
+        "shap_value": -0.4198,
+        "direction": "negative contribution",
+        "rank": 6,
+        "natural_language_summary": "'DM' (patient value: 0) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Dyspnea",
+        "value": "N",
+        "shap_value": 0.4158,
+        "direction": "positive contribution",
+        "rank": 7,
+        "natural_language_summary": "'Dyspnea' (patient value: N) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "CR",
+        "value": 0.7,
+        "shap_value": -0.3767,
+        "direction": "negative contribution",
+        "rank": 8,
+        "natural_language_summary": "'CR' (patient value: 0.7) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Length",
+        "value": 175,
+        "shap_value": -0.3617,
+        "direction": "negative contribution",
+        "rank": 9,
+        "natural_language_summary": "'Length' (patient value: 175) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Age",
+        "value": 53,
+        "shap_value": -0.3598,
+        "direction": "negative contribution",
+        "rank": 10,
+        "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Neut",
+        "value": 52,
+        "shap_value": -0.3479,
+        "direction": "negative contribution",
+        "rank": 11,
+        "natural_language_summary": "'Neut' (patient value: 52) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -0.3437,
+        "direction": "negative contribution",
+        "rank": 12,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "HDL",
+        "value": 30.0,
+        "shap_value": -0.2647,
+        "direction": "negative contribution",
+        "rank": 13,
+        "natural_language_summary": "'HDL' (patient value: 30.0) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Function Class",
+        "value": 0,
+        "shap_value": -0.2566,
+        "direction": "negative contribution",
+        "rank": 14,
+        "natural_language_summary": "'Function Class' (patient value: 0) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Current Smoker",
+        "value": 1,
+        "shap_value": 0.2245,
+        "direction": "positive contribution",
+        "rank": 15,
+        "natural_language_summary": "'Current Smoker' (patient value: 1) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "K",
+        "value": 4.7,
+        "shap_value": 0.2183,
+        "direction": "positive contribution",
+        "rank": 16,
+        "natural_language_summary": "'K' (patient value: 4.7) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "HB",
+        "value": 15.6,
+        "shap_value": 0.2099,
+        "direction": "positive contribution",
+        "rank": 17,
+        "natural_language_summary": "'HB' (patient value: 15.6) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "BMI",
+        "value": 29.387755102040817,
+        "shap_value": -0.1816,
+        "direction": "negative contribution",
+        "rank": 18,
+        "natural_language_summary": "'BMI' (patient value: 29.387755102040817) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "HTN",
+        "value": 1,
+        "shap_value": 0.1698,
+        "direction": "positive contribution",
+        "rank": 19,
+        "natural_language_summary": "'HTN' (patient value: 1) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Region RWMA",
+        "value": 0,
+        "shap_value": 0.1323,
+        "direction": "positive contribution",
+        "rank": 20,
+        "natural_language_summary": "'Region RWMA' (patient value: 0) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Atypical",
+        "value": "N",
+        "shap_value": 0.1276,
+        "direction": "positive contribution",
+        "rank": 21,
+        "natural_language_summary": "'Atypical' (patient value: N) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "DLP",
+        "value": "Y",
+        "shap_value": -0.1186,
+        "direction": "negative contribution",
+        "rank": 22,
+        "natural_language_summary": "'DLP' (patient value: Y) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "FH",
+        "value": 0,
+        "shap_value": -0.0963,
+        "direction": "negative contribution",
+        "rank": 23,
+        "natural_language_summary": "'FH' (patient value: 0) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Nonanginal",
+        "value": "N",
+        "shap_value": 0.0673,
+        "direction": "positive contribution",
+        "rank": 24,
+        "natural_language_summary": "'Nonanginal' (patient value: N) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "PLT",
+        "value": 261,
+        "shap_value": -0.0633,
+        "direction": "negative contribution",
+        "rank": 25,
+        "natural_language_summary": "'PLT' (patient value: 261) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "PR",
+        "value": 80,
+        "shap_value": 0.0562,
+        "direction": "positive contribution",
+        "rank": 26,
+        "natural_language_summary": "'PR' (patient value: 80) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Q Wave",
+        "value": 0,
+        "shap_value": -0.0548,
+        "direction": "negative contribution",
+        "rank": 27,
+        "natural_language_summary": "'Q Wave' (patient value: 0) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "EF-TTE",
+        "value": 50,
+        "shap_value": 0.0506,
+        "direction": "positive contribution",
+        "rank": 28,
+        "natural_language_summary": "'EF-TTE' (patient value: 50) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "BP",
+        "value": 110,
+        "shap_value": 0.0415,
+        "direction": "positive contribution",
+        "rank": 29,
+        "natural_language_summary": "'BP' (patient value: 110) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "CRF",
+        "value": "N",
+        "shap_value": 0.0408,
+        "direction": "positive contribution",
+        "rank": 30,
+        "natural_language_summary": "'CRF' (patient value: N) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Systolic Murmur",
+        "value": "N",
+        "shap_value": 0.0379,
+        "direction": "positive contribution",
+        "rank": 31,
+        "natural_language_summary": "'Systolic Murmur' (patient value: N) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Tinversion",
+        "value": 1,
+        "shap_value": -0.0337,
+        "direction": "negative contribution",
+        "rank": 32,
+        "natural_language_summary": "'Tinversion' (patient value: 1) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "LDL",
+        "value": 155,
+        "shap_value": -0.0317,
+        "direction": "negative contribution",
+        "rank": 33,
+        "natural_language_summary": "'LDL' (patient value: 155) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "VHD",
+        "value": "N",
+        "shap_value": -0.031,
+        "direction": "negative contribution",
+        "rank": 34,
+        "natural_language_summary": "'VHD' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "WBC",
+        "value": 5700,
+        "shap_value": 0.0308,
+        "direction": "positive contribution",
+        "rank": 35,
+        "natural_language_summary": "'WBC' (patient value: 5700) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Diastolic Murmur",
+        "value": "N",
+        "shap_value": 0.0295,
+        "direction": "positive contribution",
+        "rank": 36,
+        "natural_language_summary": "'Diastolic Murmur' (patient value: N) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Poor R Progression",
+        "value": "N",
+        "shap_value": -0.0277,
+        "direction": "negative contribution",
+        "rank": 37,
+        "natural_language_summary": "'Poor R Progression' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "St Depression",
+        "value": 1,
+        "shap_value": 0.0232,
+        "direction": "positive contribution",
+        "rank": 38,
+        "natural_language_summary": "'St Depression' (patient value: 1) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "FBS",
+        "value": 90,
+        "shap_value": 0.0183,
+        "direction": "positive contribution",
+        "rank": 39,
+        "natural_language_summary": "'FBS' (patient value: 90) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "CVA",
+        "value": "N",
+        "shap_value": -0.0171,
+        "direction": "negative contribution",
+        "rank": 40,
+        "natural_language_summary": "'CVA' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Lung rales",
+        "value": "N",
+        "shap_value": -0.0128,
+        "direction": "negative contribution",
+        "rank": 41,
+        "natural_language_summary": "'Lung rales' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Airway disease",
+        "value": "N",
+        "shap_value": -0.0113,
+        "direction": "negative contribution",
+        "rank": 42,
+        "natural_language_summary": "'Airway disease' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Na",
+        "value": 141,
+        "shap_value": -0.01,
+        "direction": "negative contribution",
+        "rank": 43,
+        "natural_language_summary": "'Na' (patient value: 141) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Obesity",
+        "value": "Y",
+        "shap_value": 0.0096,
+        "direction": "positive contribution",
+        "rank": 44,
+        "natural_language_summary": "'Obesity' (patient value: Y) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "EX-Smoker",
+        "value": 0,
+        "shap_value": -0.0091,
+        "direction": "negative contribution",
+        "rank": 45,
+        "natural_language_summary": "'EX-Smoker' (patient value: 0) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Weak Peripheral Pulse",
+        "value": "N",
+        "shap_value": 0.0073,
+        "direction": "positive contribution",
+        "rank": 46,
+        "natural_language_summary": "'Weak Peripheral Pulse' (patient value: N) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "Edema",
+        "value": 0,
+        "shap_value": 0.0069,
+        "direction": "positive contribution",
+        "rank": 47,
+        "natural_language_summary": "'Edema' (patient value: 0) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "LVH",
+        "value": "N",
+        "shap_value": -0.0068,
+        "direction": "negative contribution",
+        "rank": 48,
+        "natural_language_summary": "'LVH' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "St Elevation",
+        "value": 0,
+        "shap_value": 0.0058,
+        "direction": "positive contribution",
+        "rank": 49,
+        "natural_language_summary": "'St Elevation' (patient value: 0) contributed positively to the model's RCA probability output."
+      },
+      {
+        "feature": "CHF",
+        "value": "N",
+        "shap_value": -0.0051,
+        "direction": "negative contribution",
+        "rank": 50,
+        "natural_language_summary": "'CHF' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Lymph",
+        "value": 39,
+        "shap_value": -0.005,
+        "direction": "negative contribution",
+        "rank": 51,
+        "natural_language_summary": "'Lymph' (patient value: 39) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "Thyroid Disease",
+        "value": "N",
+        "shap_value": -0.0036,
+        "direction": "negative contribution",
+        "rank": 52,
+        "natural_language_summary": "'Thyroid Disease' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "BBB",
+        "value": "N",
+        "shap_value": -0.0012,
+        "direction": "negative contribution",
+        "rank": 53,
+        "natural_language_summary": "'BBB' (patient value: N) contributed negatively to the model's RCA probability output."
+      },
+      {
+        "feature": "LowTH Ang",
+        "value": "N",
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 54,
+        "natural_language_summary": "'LowTH Ang' (patient value: N) contributed positively to the model's RCA probability output."
+      }
+    ],
+    "consistency_check": {
+      "space": "Model decision space (log-odds / margin for linear & tree models, probability for kernel)",
+      "base_value": -0.4183,
+      "sum_shap": 0.2823,
+      "reconstructed_output": -0.136
+    }
+  }
+}

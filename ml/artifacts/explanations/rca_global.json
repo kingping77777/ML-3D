@@ -1,0 +1,278 @@
+{
+  "target": "RCA",
+  "model": "Logistic Regression (Balanced)",
+  "explainer": "LinearExplainer",
+  "base_value": -0.4183396093637337,
+  "global_importance": [
+    {
+      "feature": "DM",
+      "mean_abs_shap": 0.6157010588371387,
+      "rank": 1
+    },
+    {
+      "feature": "Sex",
+      "mean_abs_shap": 0.5859763237095764,
+      "rank": 2
+    },
+    {
+      "feature": "Age",
+      "mean_abs_shap": 0.5802130117907611,
+      "rank": 3
+    },
+    {
+      "feature": "Dyspnea",
+      "mean_abs_shap": 0.42328853577063075,
+      "rank": 4
+    },
+    {
+      "feature": "Weight",
+      "mean_abs_shap": 0.41915146988595176,
+      "rank": 5
+    },
+    {
+      "feature": "ESR",
+      "mean_abs_shap": 0.3930980571584948,
+      "rank": 6
+    },
+    {
+      "feature": "Function Class",
+      "mean_abs_shap": 0.34823432124712345,
+      "rank": 7
+    },
+    {
+      "feature": "Typical Chest Pain",
+      "mean_abs_shap": 0.3293699245206387,
+      "rank": 8
+    },
+    {
+      "feature": "BUN",
+      "mean_abs_shap": 0.3222410787396433,
+      "rank": 9
+    },
+    {
+      "feature": "Neut",
+      "mean_abs_shap": 0.3117312347186762,
+      "rank": 10
+    },
+    {
+      "feature": "BMI",
+      "mean_abs_shap": 0.30185820763386534,
+      "rank": 11
+    },
+    {
+      "feature": "Length",
+      "mean_abs_shap": 0.2794381567137331,
+      "rank": 12
+    },
+    {
+      "feature": "TG",
+      "mean_abs_shap": 0.25729192483514757,
+      "rank": 13
+    },
+    {
+      "feature": "CR",
+      "mean_abs_shap": 0.21547381278218677,
+      "rank": 14
+    },
+    {
+      "feature": "Region RWMA",
+      "mean_abs_shap": 0.21245398759867484,
+      "rank": 15
+    },
+    {
+      "feature": "HDL",
+      "mean_abs_shap": 0.19257637052754625,
+      "rank": 16
+    },
+    {
+      "feature": "HTN",
+      "mean_abs_shap": 0.19237450717414922,
+      "rank": 17
+    },
+    {
+      "feature": "Atypical",
+      "mean_abs_shap": 0.1716526979758086,
+      "rank": 18
+    },
+    {
+      "feature": "VHD",
+      "mean_abs_shap": 0.1659589607978991,
+      "rank": 19
+    },
+    {
+      "feature": "K",
+      "mean_abs_shap": 0.15985240046335739,
+      "rank": 20
+    },
+    {
+      "feature": "FH",
+      "mean_abs_shap": 0.15549586084313943,
+      "rank": 21
+    },
+    {
+      "feature": "Nonanginal",
+      "mean_abs_shap": 0.1109682859754155,
+      "rank": 22
+    },
+    {
+      "feature": "HB",
+      "mean_abs_shap": 0.10864540191561543,
+      "rank": 23
+    },
+    {
+      "feature": "EF-TTE",
+      "mean_abs_shap": 0.09503473377502183,
+      "rank": 24
+    },
+    {
+      "feature": "Current Smoker",
+      "mean_abs_shap": 0.09114682450768866,
+      "rank": 25
+    },
+    {
+      "feature": "DLP",
+      "mean_abs_shap": 0.0840898262956816,
+      "rank": 26
+    },
+    {
+      "feature": "Q Wave",
+      "mean_abs_shap": 0.08115673514645645,
+      "rank": 27
+    },
+    {
+      "feature": "PR",
+      "mean_abs_shap": 0.07929010957613693,
+      "rank": 28
+    },
+    {
+      "feature": "Poor R Progression",
+      "mean_abs_shap": 0.06718608348093132,
+      "rank": 29
+    },
+    {
+      "feature": "CRF",
+      "mean_abs_shap": 0.06605633439387695,
+      "rank": 30
+    },
+    {
+      "feature": "PLT",
+      "mean_abs_shap": 0.062165961230592016,
+      "rank": 31
+    },
+    {
+      "feature": "Systolic Murmur",
+      "mean_abs_shap": 0.061852116349261646,
+      "rank": 32
+    },
+    {
+      "feature": "Na",
+      "mean_abs_shap": 0.060067994268536325,
+      "rank": 33
+    },
+    {
+      "feature": "Diastolic Murmur",
+      "mean_abs_shap": 0.056905472941172305,
+      "rank": 34
+    },
+    {
+      "feature": "CVA",
+      "mean_abs_shap": 0.030562879971822984,
+      "rank": 35
+    },
+    {
+      "feature": "WBC",
+      "mean_abs_shap": 0.029564675753072436,
+      "rank": 36
+    },
+    {
+      "feature": "BP",
+      "mean_abs_shap": 0.02938688372603605,
+      "rank": 37
+    },
+    {
+      "feature": "FBS",
+      "mean_abs_shap": 0.022342061496469477,
+      "rank": 38
+    },
+    {
+      "feature": "Tinversion",
+      "mean_abs_shap": 0.02167436188344015,
+      "rank": 39
+    },
+    {
+      "feature": "Lung rales",
+      "mean_abs_shap": 0.021126602785569572,
+      "rank": 40
+    },
+    {
+      "feature": "BBB",
+      "mean_abs_shap": 0.019800879019777385,
+      "rank": 41
+    },
+    {
+      "feature": "Airway disease",
+      "mean_abs_shap": 0.017350795654891414,
+      "rank": 42
+    },
+    {
+      "feature": "LDL",
+      "mean_abs_shap": 0.016294387501457452,
+      "rank": 43
+    },
+    {
+      "feature": "EX-Smoker",
+      "mean_abs_shap": 0.016083301764060032,
+      "rank": 44
+    },
+    {
+      "feature": "Obesity",
+      "mean_abs_shap": 0.014558690393648906,
+      "rank": 45
+    },
+    {
+      "feature": "Thyroid Disease",
+      "mean_abs_shap": 0.011906264966185244,
+      "rank": 46
+    },
+    {
+      "feature": "Edema",
+      "mean_abs_shap": 0.011890824827199295,
+      "rank": 47
+    },
+    {
+      "feature": "St Depression",
+      "mean_abs_shap": 0.01016221890773224,
+      "rank": 48
+    },
+    {
+      "feature": "Weak Peripheral Pulse",
+      "mean_abs_shap": 0.010129215496179582,
+      "rank": 49
+    },
+    {
+      "feature": "LVH",
+      "mean_abs_shap": 0.009647232041893846,
+      "rank": 50
+    },
+    {
+      "feature": "St Elevation",
+      "mean_abs_shap": 0.009101225523220569,
+      "rank": 51
+    },
+    {
+      "feature": "CHF",
+      "mean_abs_shap": 0.006720686857966902,
+      "rank": 52
+    },
+    {
+      "feature": "Lymph",
+      "mean_abs_shap": 0.0054210834140638086,
+      "rank": 53
+    },
+    {
+      "feature": "LowTH Ang",
+      "mean_abs_shap": 0.0029517784306794833,
+      "rank": 54
+    }
+  ]
+}
