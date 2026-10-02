@@ -295,7 +295,7 @@ def explain_patient(target_name, model_obj, patient_row_df, X_raw_df, raw_featur
         dir_word = "positively" if item["shap_value"] >= 0 else "negatively"
         item["natural_language_summary"] = (
             f"'{item['feature']}' (patient value: {item['value']}) contributed {dir_word} "
-            f"to the model's {target_name.upper()} probability output."
+            f"to the model output for this input."
         )
         
     sum_shap = float(np.sum([item["shap_value"] for item in features_contrib]))

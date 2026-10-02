@@ -32,6 +32,20 @@ backend/
 
 ---
 
+## Verified Feature Schema Breakdown (54 Usable Raw Features)
+
+- **21 Numerical**: `Age`, `Weight`, `Length`, `BMI`, `BP`, `PR`, `FBS`, `CR`, `TG`, `LDL`, `HDL`, `BUN`, `ESR`, `HB`, `K`, `Na`, `WBC`, `Lymph`, `Neut`, `PLT`, `EF-TTE`
+- **4 Multi-Class Categorical**:
+  1. `Sex`: `'Male'` or `'Female'`
+  2. `Function Class`: `0`, `1`, `2`, or `3`
+  3. `BBB`: `'N'`, `'LBBB'`, or `'RBBB'`
+  4. `VHD`: `'N'`, `'mild'`, `'Moderate'`, or `'Severe'`
+- **29 Binary**: `Obesity`, `CRF`, `CVA`, `Airway disease`, `Thyroid Disease`, `CHF`, `DLP`, `Weak Peripheral Pulse`, `Lung rales`, `Systolic Murmur`, `Diastolic Murmur`, `Dyspnea`, `Atypical`, `Nonanginal`, `LowTH Ang`, `LVH`, `Poor R Progression`, `DM`, `HTN`, `Current Smoker`, `EX-Smoker`, `FH`, `Edema`, `Typical Chest Pain`, `Q Wave`, `St Elevation`, `St Depression`, `Tinversion`, `Region RWMA`
+
+*Excluded targets & data leakage variables: `Cath`, `LAD`, `LCX`, `RCA`, `Exertional CP`.*
+
+---
+
 ## Installation & Environment Setup
 
 ### 1. Requirements
@@ -54,7 +68,6 @@ ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000,http://127.0.0.1:300
 Run the server from the repository root or backend directory using `uvicorn`:
 
 ```bash
-# From repository root:
 uvicorn backend.app.main:app --reload --port 8000
 ```
 
@@ -103,6 +116,8 @@ Access Interactive API Documentation:
   "EF-TTE": 55,
   "Sex": "Male",
   "Function Class": 0,
+  "BBB": "N",
+  "VHD": "N",
   "Obesity": 0,
   "CRF": 0,
   "CVA": 0,
@@ -120,8 +135,6 @@ Access Interactive API Documentation:
   "LowTH Ang": 0,
   "LVH": 0,
   "Poor R Progression": 0,
-  "BBB": 0,
-  "VHD": 0,
   "DM": 1,
   "HTN": 1,
   "Current Smoker": 1,
@@ -151,4 +164,4 @@ pytest backend/tests/
 
 ## Medical & Educational Disclaimer
 
-> **IMPORTANT**: CardioVision 3D outputs model-estimated probabilities and feature contribution associations for research and clinical decision-support demonstration purposes only. It does NOT provide clinical diagnoses or treatment advice. Feature contributions indicate statistical impact on the model's prediction output, not direct physiological causation.
+> **IMPORTANT**: CardioVision 3D outputs model-estimated probabilities and feature contribution associations for research and clinical decision-support demonstration purposes only. It does NOT provide clinical diagnoses or treatment advice. Feature contributions describe statistical impact on the model output, not direct physiological causation.

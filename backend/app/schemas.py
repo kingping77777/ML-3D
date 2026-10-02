@@ -5,7 +5,7 @@ import pandas as pd
 class PatientInput(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
-    # 21 Numerical Features
+    # --- 21 Numerical Features ---
     Age: float = Field(..., alias="Age", ge=1, le=120, description="Age in years")
     Weight: float = Field(..., alias="Weight", ge=20, le=250, description="Weight in kg")
     Length: float = Field(..., alias="Length", ge=50, le=250, description="Height in cm")
@@ -25,14 +25,16 @@ class PatientInput(BaseModel):
     WBC: float = Field(..., alias="WBC", ge=1000, le=50000, description="White Blood Cell count")
     Lymph: float = Field(..., alias="Lymph", ge=1, le=99, description="Lymphocytes (%)")
     Neut: float = Field(..., alias="Neut", ge=1, le=99, description="Neutrophils (%)")
-    PLT: float = Field(..., alias="PLT", ge=10000, le=1000000, description="Platelets count")
+    PLT: float = Field(..., alias="PLT", ge=10, le=1000000, description="Platelets count")
     EF_TTE: float = Field(..., alias="EF-TTE", ge=5, le=90, description="Ejection Fraction (%)")
 
-    # 2 Categorical / Ordinal Features
+    # --- 4 Multi-Class Categorical Features ---
     Sex: Literal["Male", "Female"] = Field(..., alias="Sex", description="Patient sex ('Male' or 'Female')")
-    Function_Class: int = Field(..., alias="Function Class", ge=0, le=4, description="NYHA Function Class (0-4)")
+    Function_Class: Literal[0, 1, 2, 3] = Field(..., alias="Function Class", description="NYHA Function Class (0, 1, 2, or 3)")
+    BBB: Literal["N", "LBBB", "RBBB"] = Field(..., alias="BBB", description="Bundle Branch Block ('N', 'LBBB', 'RBBB')")
+    VHD: Literal["N", "mild", "Moderate", "Severe"] = Field(..., alias="VHD", description="Valvular Heart Disease ('N', 'mild', 'Moderate', 'Severe')")
 
-    # 31 Binary Features (accept 0 or 1, or boolean)
+    # --- 29 Binary Features ---
     Obesity: int = Field(..., alias="Obesity", ge=0, le=1)
     CRF: int = Field(..., alias="CRF", ge=0, le=1)
     CVA: int = Field(..., alias="CVA", ge=0, le=1)
@@ -50,8 +52,6 @@ class PatientInput(BaseModel):
     LowTH_Ang: int = Field(..., alias="LowTH Ang", ge=0, le=1)
     LVH: int = Field(..., alias="LVH", ge=0, le=1)
     Poor_R_Progression: int = Field(..., alias="Poor R Progression", ge=0, le=1)
-    BBB: int = Field(..., alias="BBB", ge=0, le=1)
-    VHD: int = Field(..., alias="VHD", ge=0, le=1)
     DM: int = Field(..., alias="DM", ge=0, le=1)
     HTN: int = Field(..., alias="HTN", ge=0, le=1)
     Current_Smoker: int = Field(..., alias="Current Smoker", ge=0, le=1)
@@ -65,6 +65,25 @@ class PatientInput(BaseModel):
     Tinversion: int = Field(..., alias="Tinversion", ge=0, le=1)
     Region_RWMA: int = Field(..., alias="Region RWMA", ge=0, le=1)
 
+    @field_validator(
+        "Obesity", "CRF", "CVA", "Airway_disease", "Thyroid_Disease", "CHF", "DLP",
+        "Weak_Peripheral_Pulse", "Lung_rales", "Systolic_Murmur", "Diastolic_Murmur",
+        "Dyspnea", "Atypical", "Nonanginal", "LowTH_Ang", "LVH", "Poor_R_Progression",
+        "DM", "HTN", "Current_Smoker", "EX_Smoker", "FH", "Edema", "Typical_Chest_Pain",
+        "Q_Wave", "St_Elevation", "St_Depression", "Tinversion", "Region_RWMA",
+        mode="before"
+    )
+    def normalize_binary_or_flag(cls, v: Any) -> Any:
+        if isinstance(v, str):
+            v_clean = v.strip().upper()
+            if v_clean in ["Y", "YES", "1", "TRUE"]:
+                return 1
+            if v_clean in ["N", "NO", "0", "FALSE"]:
+                return 0
+        if isinstance(v, bool):
+            return 1 if v else 0
+        return v
+
     @field_validator("Sex", mode="before")
     def normalize_sex(cls, v: Any) -> str:
         if isinstance(v, str):
@@ -77,6 +96,32 @@ class PatientInput(BaseModel):
             if val_cap in ["Male", "M"]:
                 return "Male"
         raise ValueError("Sex must be 'Male' or 'Female'.")
+
+    @field_validator("BBB", mode="before")
+    def validate_bbb(cls, v: Any) -> str:
+        if isinstance(v, str):
+            val_clean = v.strip()
+            if val_clean.upper() in ["N", "NO", "NONE", "NORMAL"]:
+                return "N"
+            if val_clean.upper() == "LBBB":
+                return "LBBB"
+            if val_clean.upper() == "RBBB":
+                return "RBBB"
+        raise ValueError("BBB must be one of: 'N', 'LBBB', 'RBBB'.")
+
+    @field_validator("VHD", mode="before")
+    def validate_vhd(cls, v: Any) -> str:
+        if isinstance(v, str):
+            val_clean = v.strip()
+            if val_clean.upper() in ["N", "NO", "NONE", "NORMAL"]:
+                return "N"
+            if val_clean.lower() == "mild":
+                return "mild"
+            if val_clean.capitalize() == "Moderate":
+                return "Moderate"
+            if val_clean.capitalize() == "Severe":
+                return "Severe"
+        raise ValueError("VHD must be one of: 'N', 'mild', 'Moderate', 'Severe'.")
 
     def to_df(self) -> pd.DataFrame:
         """
