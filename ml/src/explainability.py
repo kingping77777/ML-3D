@@ -22,28 +22,79 @@ def resolve_path(path):
         return alt_2
     return path
 
-def fix_unpickled_imputers(transformer):
+def fix_unpickled_imputers(obj, visited=None):
     """
-    Ensures unpickled SimpleImputer instances have both _fill_dtype and _fit_dtype set across scikit-learn versions (1.7 vs 1.9).
+    Recursively patches all SimpleImputer instances inside Pipelines, ColumnTransformers,
+    and CalibratedClassifierCV wrappers to maintain compatibility across scikit-learn versions (1.7 vs 1.9).
     """
-    def _patch_imputer(obj):
-        if hasattr(obj, "statistics_"):
-            if not hasattr(obj, "_fill_dtype"):
-                obj._fill_dtype = getattr(obj, "_fit_dtype", obj.statistics_.dtype)
-            if not hasattr(obj, "_fit_dtype"):
-                obj._fit_dtype = getattr(obj, "_fill_dtype", obj.statistics_.dtype)
+    if obj is None:
+        return
+    if visited is None:
+        visited = set()
+    
+    obj_id = id(obj)
+    if obj_id in visited:
+        return
+    visited.add(obj_id)
 
-    if hasattr(transformer, "transformers_"):
-        for name, trans, cols in transformer.transformers_:
-            if hasattr(trans, "steps"):
-                for step_name, step_obj in trans.steps:
-                    _patch_imputer(step_obj)
+    # Patch SimpleImputer specifically
+    if hasattr(obj, "statistics_") or type(obj).__name__ == "SimpleImputer":
+        dtype_val = getattr(obj, "statistics_", None)
+        dtype_val = dtype_val.dtype if hasattr(dtype_val, "dtype") else np.float64
+        if not hasattr(obj, "_fill_dtype"):
+            setattr(obj, "_fill_dtype", getattr(obj, "_fit_dtype", dtype_val))
+        if not hasattr(obj, "_fit_dtype"):
+            setattr(obj, "_fit_dtype", getattr(obj, "_fill_dtype", dtype_val))
+
+    # Traverse common container/wrapper structures
+    if hasattr(obj, "calibrated_classifiers_"):
+        for cc in getattr(obj, "calibrated_classifiers_", []):
+            if hasattr(cc, "estimator"):
+                fix_unpickled_imputers(cc.estimator, visited)
+            if hasattr(cc, "base_estimator"):
+                fix_unpickled_imputers(cc.base_estimator, visited)
+
+    if hasattr(obj, "named_steps"):
+        for step_name, step_obj in obj.named_steps.items():
+            fix_unpickled_imputers(step_obj, visited)
+    elif hasattr(obj, "steps"):
+        for step in obj.steps:
+            if isinstance(step, (list, tuple)) and len(step) >= 2:
+                fix_unpickled_imputers(step[1], visited)
             else:
-                _patch_imputer(trans)
+                fix_unpickled_imputers(step, visited)
+
+    if hasattr(obj, "transformers_"):
+        for item in obj.transformers_:
+            if isinstance(item, (list, tuple)) and len(item) >= 2:
+                fix_unpickled_imputers(item[1], visited)
+    if hasattr(obj, "transformers"):
+        for item in obj.transformers:
+            if isinstance(item, (list, tuple)) and len(item) >= 2:
+                fix_unpickled_imputers(item[1], visited)
+    if hasattr(obj, "named_transformers_"):
+        for name, trans in obj.named_transformers_.items():
+            fix_unpickled_imputers(trans, visited)
+
+    if hasattr(obj, "estimator") and getattr(obj, "estimator") is not obj:
+        fix_unpickled_imputers(obj.estimator, visited)
+    if hasattr(obj, "base_estimator") and getattr(obj, "base_estimator") is not obj:
+        fix_unpickled_imputers(obj.base_estimator, visited)
+
+    # Also inspect __dict__ for any nested objects
+    if hasattr(obj, "__dict__"):
+        for k, v in list(obj.__dict__.items()):
+            if isinstance(v, (list, tuple)):
+                for elem in v:
+                    if hasattr(elem, "__dict__") or hasattr(elem, "statistics_"):
+                        fix_unpickled_imputers(elem, visited)
+            elif hasattr(v, "__dict__") or hasattr(v, "statistics_"):
+                fix_unpickled_imputers(v, visited)
 
 def load_final_models(artifacts_dir="ml/artifacts/final"):
     """
     Loads model metadata and model artifacts for all four targets: CAD, LAD, LCX, RCA.
+    Automatically patches all unpickled imputers across version mismatches.
     """
     artifacts_dir = resolve_path(artifacts_dir)
     meta_path = os.path.join(artifacts_dir, "model_metadata.json")
@@ -53,7 +104,9 @@ def load_final_models(artifacts_dir="ml/artifacts/final"):
     models = {}
     for target in ["cad", "lad", "lcx", "rca"]:
         path = os.path.join(artifacts_dir, f"{target}_model.joblib")
-        models[target] = joblib.load(path)
+        m_obj = joblib.load(path)
+        fix_unpickled_imputers(m_obj)
+        models[target] = m_obj
         
     return models, metadata
 
@@ -62,6 +115,7 @@ def extract_pipeline_and_classifier(model_obj):
     Extracts the preprocessor and the underlying core classifier from
     either a Pipeline or a CalibratedClassifierCV wrapper.
     """
+    fix_unpickled_imputers(model_obj)
     if isinstance(model_obj, Pipeline):
         preprocessor = model_obj.named_steps['preprocessor']
         classifier = model_obj.named_steps['classifier']
@@ -76,7 +130,6 @@ def extract_pipeline_and_classifier(model_obj):
     else:
         raise ValueError(f"Unsupported model object type: {type(model_obj)}")
         
-    fix_unpickled_imputers(preprocessor)
     return preprocessor, classifier, calibration_status, is_calibrated
 
 def get_feature_mapping(preprocessor, raw_features):

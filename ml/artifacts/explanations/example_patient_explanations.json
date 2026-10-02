@@ -1074,12 +1074,12 @@
     "threshold": 0.45,
     "predicted_class": 0,
     "shap_base_value": 0.3654,
-    "shap_sum_contributions": -0.0516,
+    "shap_sum_contributions": -0.0517,
     "top_features": [
       {
         "feature": "Age",
         "value": 53,
-        "shap_value": -0.0554,
+        "shap_value": -0.0551,
         "direction": "negative contribution",
         "rank": 1,
         "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's LCX probability output."
@@ -1087,7 +1087,7 @@
       {
         "feature": "LDL",
         "value": 155,
-        "shap_value": 0.0478,
+        "shap_value": 0.0454,
         "direction": "positive contribution",
         "rank": 2,
         "natural_language_summary": "'LDL' (patient value: 155) contributed positively to the model's LCX probability output."
@@ -1095,7 +1095,7 @@
       {
         "feature": "Current Smoker",
         "value": 1,
-        "shap_value": 0.0351,
+        "shap_value": 0.0326,
         "direction": "positive contribution",
         "rank": 3,
         "natural_language_summary": "'Current Smoker' (patient value: 1) contributed positively to the model's LCX probability output."
@@ -1103,65 +1103,65 @@
       {
         "feature": "K",
         "value": 4.7,
-        "shap_value": 0.0277,
+        "shap_value": 0.0309,
         "direction": "positive contribution",
         "rank": 4,
         "natural_language_summary": "'K' (patient value: 4.7) contributed positively to the model's LCX probability output."
       },
       {
-        "feature": "Typical Chest Pain",
-        "value": 0,
-        "shap_value": -0.0231,
-        "direction": "negative contribution",
-        "rank": 5,
-        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's LCX probability output."
-      },
-      {
         "feature": "Weight",
         "value": 90,
-        "shap_value": -0.0225,
+        "shap_value": -0.0229,
         "direction": "negative contribution",
-        "rank": 6,
+        "rank": 5,
         "natural_language_summary": "'Weight' (patient value: 90) contributed negatively to the model's LCX probability output."
       },
       {
-        "feature": "BP",
-        "value": 110,
-        "shap_value": -0.0192,
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -0.0222,
         "direction": "negative contribution",
-        "rank": 7,
-        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's LCX probability output."
+        "rank": 6,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's LCX probability output."
       },
       {
         "feature": "PLT",
         "value": 261,
-        "shap_value": -0.0181,
+        "shap_value": -0.0197,
+        "direction": "negative contribution",
+        "rank": 7,
+        "natural_language_summary": "'PLT' (patient value: 261) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "BP",
+        "value": 110,
+        "shap_value": -0.0187,
         "direction": "negative contribution",
         "rank": 8,
-        "natural_language_summary": "'PLT' (patient value: 261) contributed negatively to the model's LCX probability output."
+        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's LCX probability output."
       },
       {
         "feature": "FBS",
         "value": 90,
-        "shap_value": -0.0129,
+        "shap_value": -0.0121,
         "direction": "negative contribution",
         "rank": 9,
         "natural_language_summary": "'FBS' (patient value: 90) contributed negatively to the model's LCX probability output."
       },
       {
-        "feature": "Neut",
-        "value": 52,
-        "shap_value": -0.011,
+        "feature": "ESR",
+        "value": 7,
+        "shap_value": -0.0099,
         "direction": "negative contribution",
         "rank": 10,
-        "natural_language_summary": "'Neut' (patient value: 52) contributed negatively to the model's LCX probability output."
+        "natural_language_summary": "'ESR' (patient value: 7) contributed negatively to the model's LCX probability output."
       }
     ],
     "all_features": [
       {
         "feature": "Age",
         "value": 53,
-        "shap_value": -0.0554,
+        "shap_value": -0.0551,
         "direction": "negative contribution",
         "rank": 1,
         "natural_language_summary": "'Age' (patient value: 53) contributed negatively to the model's LCX probability output."
@@ -1169,7 +1169,7 @@
       {
         "feature": "LDL",
         "value": 155,
-        "shap_value": 0.0478,
+        "shap_value": 0.0454,
         "direction": "positive contribution",
         "rank": 2,
         "natural_language_summary": "'LDL' (patient value: 155) contributed positively to the model's LCX probability output."
@@ -1177,7 +1177,7 @@
       {
         "feature": "Current Smoker",
         "value": 1,
-        "shap_value": 0.0351,
+        "shap_value": 0.0326,
         "direction": "positive contribution",
         "rank": 3,
         "natural_language_summary": "'Current Smoker' (patient value: 1) contributed positively to the model's LCX probability output."
@@ -1185,58 +1185,58 @@
       {
         "feature": "K",
         "value": 4.7,
-        "shap_value": 0.0277,
+        "shap_value": 0.0309,
         "direction": "positive contribution",
         "rank": 4,
         "natural_language_summary": "'K' (patient value: 4.7) contributed positively to the model's LCX probability output."
       },
       {
-        "feature": "Typical Chest Pain",
-        "value": 0,
-        "shap_value": -0.0231,
-        "direction": "negative contribution",
-        "rank": 5,
-        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's LCX probability output."
-      },
-      {
         "feature": "Weight",
         "value": 90,
-        "shap_value": -0.0225,
+        "shap_value": -0.0229,
         "direction": "negative contribution",
-        "rank": 6,
+        "rank": 5,
         "natural_language_summary": "'Weight' (patient value: 90) contributed negatively to the model's LCX probability output."
       },
       {
-        "feature": "BP",
-        "value": 110,
-        "shap_value": -0.0192,
+        "feature": "Typical Chest Pain",
+        "value": 0,
+        "shap_value": -0.0222,
         "direction": "negative contribution",
-        "rank": 7,
-        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's LCX probability output."
+        "rank": 6,
+        "natural_language_summary": "'Typical Chest Pain' (patient value: 0) contributed negatively to the model's LCX probability output."
       },
       {
         "feature": "PLT",
         "value": 261,
-        "shap_value": -0.0181,
+        "shap_value": -0.0197,
+        "direction": "negative contribution",
+        "rank": 7,
+        "natural_language_summary": "'PLT' (patient value: 261) contributed negatively to the model's LCX probability output."
+      },
+      {
+        "feature": "BP",
+        "value": 110,
+        "shap_value": -0.0187,
         "direction": "negative contribution",
         "rank": 8,
-        "natural_language_summary": "'PLT' (patient value: 261) contributed negatively to the model's LCX probability output."
+        "natural_language_summary": "'BP' (patient value: 110) contributed negatively to the model's LCX probability output."
       },
       {
         "feature": "FBS",
         "value": 90,
-        "shap_value": -0.0129,
+        "shap_value": -0.0121,
         "direction": "negative contribution",
         "rank": 9,
         "natural_language_summary": "'FBS' (patient value: 90) contributed negatively to the model's LCX probability output."
       },
       {
-        "feature": "Neut",
-        "value": 52,
-        "shap_value": -0.011,
+        "feature": "ESR",
+        "value": 7,
+        "shap_value": -0.0099,
         "direction": "negative contribution",
         "rank": 10,
-        "natural_language_summary": "'Neut' (patient value: 52) contributed negatively to the model's LCX probability output."
+        "natural_language_summary": "'ESR' (patient value: 7) contributed negatively to the model's LCX probability output."
       },
       {
         "feature": "Length",
@@ -1295,19 +1295,11 @@
         "natural_language_summary": "'BUN' (patient value: 8) contributed positively to the model's LCX probability output."
       },
       {
-        "feature": "ESR",
-        "value": 7,
-        "shap_value": 0.0,
-        "direction": "positive contribution",
-        "rank": 18,
-        "natural_language_summary": "'ESR' (patient value: 7) contributed positively to the model's LCX probability output."
-      },
-      {
         "feature": "HB",
         "value": 15.6,
         "shap_value": 0.0,
         "direction": "positive contribution",
-        "rank": 19,
+        "rank": 18,
         "natural_language_summary": "'HB' (patient value: 15.6) contributed positively to the model's LCX probability output."
       },
       {
@@ -1315,7 +1307,7 @@
         "value": 141,
         "shap_value": 0.0,
         "direction": "positive contribution",
-        "rank": 20,
+        "rank": 19,
         "natural_language_summary": "'Na' (patient value: 141) contributed positively to the model's LCX probability output."
       },
       {
@@ -1323,7 +1315,7 @@
         "value": 5700,
         "shap_value": 0.0,
         "direction": "positive contribution",
-        "rank": 21,
+        "rank": 20,
         "natural_language_summary": "'WBC' (patient value: 5700) contributed positively to the model's LCX probability output."
       },
       {
@@ -1331,8 +1323,16 @@
         "value": 39,
         "shap_value": 0.0,
         "direction": "positive contribution",
-        "rank": 22,
+        "rank": 21,
         "natural_language_summary": "'Lymph' (patient value: 39) contributed positively to the model's LCX probability output."
+      },
+      {
+        "feature": "Neut",
+        "value": 52,
+        "shap_value": 0.0,
+        "direction": "positive contribution",
+        "rank": 22,
+        "natural_language_summary": "'Neut' (patient value: 52) contributed positively to the model's LCX probability output."
       },
       {
         "feature": "EF-TTE",
@@ -1594,8 +1594,8 @@
     "consistency_check": {
       "space": "Model decision space (log-odds / margin for linear & tree models, probability for kernel)",
       "base_value": 0.3654,
-      "sum_shap": -0.0516,
-      "reconstructed_output": 0.3138
+      "sum_shap": -0.0517,
+      "reconstructed_output": 0.3137
     }
   },
   "rca": {
