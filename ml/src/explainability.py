@@ -22,6 +22,17 @@ def resolve_path(path):
         return alt_2
     return path
 
+def fix_unpickled_imputers(transformer):
+    """
+    Ensures unpickled SimpleImputer instances have _fill_dtype set across scikit-learn version mismatches.
+    """
+    if hasattr(transformer, "transformers_"):
+        for name, trans, cols in transformer.transformers_:
+            if hasattr(trans, "steps"):
+                for step_name, step_obj in trans.steps:
+                    if hasattr(step_obj, "statistics_") and not hasattr(step_obj, "_fill_dtype"):
+                        step_obj._fill_dtype = step_obj.statistics_.dtype
+
 def load_final_models(artifacts_dir="ml/artifacts/final"):
     """
     Loads model metadata and model artifacts for all four targets: CAD, LAD, LCX, RCA.
@@ -57,6 +68,7 @@ def extract_pipeline_and_classifier(model_obj):
     else:
         raise ValueError(f"Unsupported model object type: {type(model_obj)}")
         
+    fix_unpickled_imputers(preprocessor)
     return preprocessor, classifier, calibration_status, is_calibrated
 
 def get_feature_mapping(preprocessor, raw_features):
