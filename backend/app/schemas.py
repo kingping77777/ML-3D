@@ -28,13 +28,15 @@ class PatientInput(BaseModel):
     PLT: float = Field(..., alias="PLT", ge=10, le=1000000, description="Platelets count")
     EF_TTE: float = Field(..., alias="EF-TTE", ge=5, le=90, description="Ejection Fraction (%)")
 
-    # --- 4 Multi-Class Categorical Features ---
+    # --- 30 Binary Features (Sex + 29 Clinical Binary Flags) ---
     Sex: Literal["Male", "Female"] = Field(..., alias="Sex", description="Patient sex ('Male' or 'Female')")
+
+    # --- 3 Multi-Class Categorical Features ---
     Function_Class: Literal[0, 1, 2, 3] = Field(..., alias="Function Class", description="NYHA Function Class (0, 1, 2, or 3)")
     BBB: Literal["N", "LBBB", "RBBB"] = Field(..., alias="BBB", description="Bundle Branch Block ('N', 'LBBB', 'RBBB')")
     VHD: Literal["N", "mild", "Moderate", "Severe"] = Field(..., alias="VHD", description="Valvular Heart Disease ('N', 'mild', 'Moderate', 'Severe')")
 
-    # --- 29 Binary Features ---
+    # --- 29 Clinical Binary Features ---
     Obesity: int = Field(..., alias="Obesity", ge=0, le=1)
     CRF: int = Field(..., alias="CRF", ge=0, le=1)
     CVA: int = Field(..., alias="CVA", ge=0, le=1)

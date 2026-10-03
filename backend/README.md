@@ -35,12 +35,11 @@ backend/
 ## Verified Feature Schema Breakdown (54 Usable Raw Features)
 
 - **21 Numerical**: `Age`, `Weight`, `Length`, `BMI`, `BP`, `PR`, `FBS`, `CR`, `TG`, `LDL`, `HDL`, `BUN`, `ESR`, `HB`, `K`, `Na`, `WBC`, `Lymph`, `Neut`, `PLT`, `EF-TTE`
-- **4 Multi-Class Categorical**:
-  1. `Sex`: `'Male'` or `'Female'`
-  2. `Function Class`: `0`, `1`, `2`, or `3`
-  3. `BBB`: `'N'`, `'LBBB'`, or `'RBBB'`
-  4. `VHD`: `'N'`, `'mild'`, `'Moderate'`, or `'Severe'`
-- **29 Binary**: `Obesity`, `CRF`, `CVA`, `Airway disease`, `Thyroid Disease`, `CHF`, `DLP`, `Weak Peripheral Pulse`, `Lung rales`, `Systolic Murmur`, `Diastolic Murmur`, `Dyspnea`, `Atypical`, `Nonanginal`, `LowTH Ang`, `LVH`, `Poor R Progression`, `DM`, `HTN`, `Current Smoker`, `EX-Smoker`, `FH`, `Edema`, `Typical Chest Pain`, `Q Wave`, `St Elevation`, `St Depression`, `Tinversion`, `Region RWMA`
+- **30 Binary**: `Sex` (`'Male'` / `'Female'`) + 29 clinical binary flags (`Obesity`, `CRF`, `CVA`, `Airway disease`, `Thyroid Disease`, `CHF`, `DLP`, `Weak Peripheral Pulse`, `Lung rales`, `Systolic Murmur`, `Diastolic Murmur`, `Dyspnea`, `Atypical`, `Nonanginal`, `LowTH Ang`, `LVH`, `Poor R Progression`, `DM`, `HTN`, `Current Smoker`, `EX-Smoker`, `FH`, `Edema`, `Typical Chest Pain`, `Q Wave`, `St Elevation`, `St Depression`, `Tinversion`, `Region RWMA`)
+- **3 Multi-Class Categorical**:
+  1. `Function Class`: `0`, `1`, `2`, or `3`
+  2. `BBB`: `'N'`, `'LBBB'`, or `'RBBB'`
+  3. `VHD`: `'N'`, `'mild'`, `'Moderate'`, or `'Severe'`
 
 *Excluded targets & data leakage variables: `Cath`, `LAD`, `LCX`, `RCA`, `Exertional CP`.*
 
