@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useCardioVision } from '../hooks/useCardioVision';
 import { PatientInputForm } from '../components/dashboard/PatientInputForm';
+import { VesselRiskCards } from '../components/dashboard/VesselRiskCards';
+import { AnatomicalExplanationCard } from '../components/dashboard/AnatomicalExplanationCard';
 import { VesselName, TargetName, PredictionResponse } from '../types/predictions';
 
 const HeartViewer = dynamic(
@@ -14,13 +16,13 @@ const HeartViewer = dynamic(
       <div style={{
         height: '500px',
         width: '100%',
-        background: '#f8fafc',
+        background: '#09090b',
         borderRadius: '8px',
-        border: '1px solid #e2e8f0',
+        border: '1px solid #27272a',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: '#64748b',
+        color: '#94a3b8',
         fontSize: '13px'
       }}>
         Loading 3D Anatomy Model...
@@ -66,8 +68,8 @@ export default function Step7DashboardPage() {
   return (
     <main style={{
       minHeight: '100vh',
-      background: '#f8fafc',
-      color: '#0f172a',
+      background: '#000000',
+      color: '#f8fafc',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       padding: '24px 32px'
     }}>
@@ -83,15 +85,15 @@ export default function Step7DashboardPage() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderBottom: '1px solid #e2e8f0',
+          borderBottom: '1px solid #27272a',
           paddingBottom: '16px'
         }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: '20px', fontWeight: 600, color: '#0f172a' }}>
-              PVC Localization & Coronary Anatomy Viewer
+            <h1 style={{ margin: 0, fontSize: '20px', fontWeight: 600, color: '#f8fafc' }}>
+              CardioVision 3D — AI Cardiac Anatomy & CAD Explainability
             </h1>
-            <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#64748b' }}>
-              Interactive 3D cardiac anatomy for mapping premature ventricular contraction (PVC) origins
+            <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#a1a1aa' }}>
+              Real-time multi-vessel CAD predictions with 3D heart mapping and plain-English clinical explanations
             </p>
           </div>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -99,9 +101,9 @@ export default function Step7DashboardPage() {
               fontSize: '12px',
               padding: '3px 8px',
               borderRadius: '4px',
-              background: '#ecfdf5',
-              color: '#059669',
-              border: '1px solid #a7f3d0',
+              background: 'rgba(16, 185, 129, 0.15)',
+              color: '#34d399',
+              border: '1px solid rgba(52, 211, 153, 0.3)',
               fontWeight: 500
             }}>
               Active Model: Dundee Anatomy 3D
@@ -112,9 +114,9 @@ export default function Step7DashboardPage() {
                 fontSize: '12px',
                 padding: '5px 12px',
                 borderRadius: '6px',
-                background: '#ffffff',
-                border: '1px solid #cbd5e1',
-                color: '#334155',
+                background: '#18181b',
+                border: '1px solid #27272a',
+                color: '#e4e4e7',
                 cursor: 'pointer',
                 fontWeight: 500
               }}
@@ -123,6 +125,13 @@ export default function Step7DashboardPage() {
             </button>
           </div>
         </header>
+
+        {/* Vessel Risk Cards Overview */}
+        <VesselRiskCards
+          analysis={analysis}
+          selectedTarget={selectedTarget}
+          onSelectTarget={setSelectedTarget}
+        />
 
         {/* Main Grid: 3D Heart Viewer & Clinical Information */}
         <div style={{
@@ -133,21 +142,21 @@ export default function Step7DashboardPage() {
         }}>
           {/* Left: 3D Heart Viewer */}
           <div style={{
-            background: '#ffffff',
-            border: '1px solid #e2e8f0',
-            borderRadius: '8px',
+            background: '#09090b',
+            border: '1px solid #27272a',
+            borderRadius: '16px',
             padding: '16px',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.5)',
             display: 'flex',
             flexDirection: 'column',
             gap: '12px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '14px', fontWeight: 600, color: '#0f172a' }}>
+              <span style={{ fontSize: '14px', fontWeight: 600, color: '#f8fafc' }}>
                 3D Cardiac Anatomy
               </span>
-              <span style={{ fontSize: '12px', color: '#64748b' }}>
-                Rotate: Left-click drag | Zoom: Scroll
+              <span style={{ fontSize: '12px', color: '#a1a1aa' }}>
+                Rotate: Left-click drag | Zoom: Scroll | Click vessel to inspect
               </span>
             </div>
 
@@ -161,37 +170,33 @@ export default function Step7DashboardPage() {
             />
           </div>
 
-          {/* Right: Clinical Information & Patient Profile */}
+          {/* Right: Clinical Information & Patient Profile Form */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{
-              background: '#ffffff',
-              border: '1px solid #e2e8f0',
-              borderRadius: '8px',
-              padding: '16px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
-            }}>
-              <h2 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 600, color: '#0f172a' }}>
-                Patient Clinical Profile
-              </h2>
-              <PatientInputForm
-                patient={patient}
-                selectedPresetId={selectedPresetId}
-                loading={loading}
-                onSelectPreset={selectPreset}
-                onUpdateField={updatePatientField}
-                onRunAnalysis={() => runAnalysis(patient)}
-                onRandomize={randomizePatient}
-              />
-            </div>
+            <PatientInputForm
+              patient={patient}
+              selectedPresetId={selectedPresetId}
+              loading={loading}
+              onSelectPreset={selectPreset}
+              onUpdateField={updatePatientField}
+              onRunAnalysis={() => runAnalysis(patient)}
+              onRandomize={randomizePatient}
+            />
           </div>
         </div>
 
+        {/* Plain-English Anatomical Explanation Breakdown Card */}
+        <AnatomicalExplanationCard
+          analysis={analysis}
+          selectedTarget={selectedTarget}
+          onSelectTarget={setSelectedTarget}
+        />
+
         {/* Clinical Disclaimer */}
         <footer style={{
-          borderTop: '1px solid #e2e8f0',
+          borderTop: '1px solid #27272a',
           paddingTop: '16px',
           fontSize: '12px',
-          color: '#64748b',
+          color: '#a1a1aa',
           display: 'flex',
           justifyContent: 'space-between'
         }}>

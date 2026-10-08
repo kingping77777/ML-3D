@@ -52,3 +52,7 @@ pnpm-debug.log*
 .idea/
 *.DS_Store
 Thumbs.db
+
+# Large 3D Models
+*.glb
+

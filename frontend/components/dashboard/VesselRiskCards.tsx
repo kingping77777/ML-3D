@@ -44,9 +44,9 @@ export const VesselRiskCards: React.FC<VesselRiskCardsProps> = ({
         onClick={() => onSelectTarget('cad')}
         style={{
           background: selectedTarget === 'cad'
-            ? 'linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%)'
-            : 'rgba(15, 23, 42, 0.75)',
-          border: selectedTarget === 'cad' ? '2px solid #38bdf8' : '1px solid rgba(51, 65, 85, 0.8)',
+            ? '#18181b'
+            : '#09090b',
+          border: selectedTarget === 'cad' ? '2px solid #38bdf8' : '1px solid #27272a',
           borderRadius: '16px',
           padding: '16px 20px',
           cursor: 'pointer',
@@ -91,7 +91,7 @@ export const VesselRiskCards: React.FC<VesselRiskCardsProps> = ({
         </div>
 
         {/* Progress bar */}
-        <div style={{ marginTop: '12px', background: '#0f172a', borderRadius: '8px', height: '8px', overflow: 'hidden', position: 'relative' }}>
+        <div style={{ marginTop: '12px', background: '#000000', borderRadius: '8px', height: '8px', overflow: 'hidden', position: 'relative' }}>
           <div
             style={{
               width: `${Math.min(100, Math.max(0, cadPred ? cadPred.probability * 100 : 0))}%`,
@@ -133,9 +133,8 @@ export const VesselRiskCards: React.FC<VesselRiskCardsProps> = ({
               key={vesselKey}
               onClick={() => onSelectTarget(vesselKey)}
               style={{
-                background: isSelected ? 'rgba(30, 41, 59, 0.95)' : 'rgba(15, 23, 42, 0.75)',
-                backdropFilter: 'blur(12px)',
-                border: isSelected ? `2px solid ${info.color}` : '1px solid rgba(51, 65, 85, 0.8)',
+                background: isSelected ? '#18181b' : '#09090b',
+                border: isSelected ? `2px solid ${info.color}` : '1px solid #27272a',
                 borderRadius: '14px',
                 padding: '14px',
                 cursor: 'pointer',
@@ -175,7 +174,7 @@ export const VesselRiskCards: React.FC<VesselRiskCardsProps> = ({
               </div>
 
               {/* Progress bar */}
-              <div style={{ background: '#0f172a', borderRadius: '6px', height: '6px', overflow: 'hidden', position: 'relative' }}>
+              <div style={{ background: '#000000', borderRadius: '6px', height: '6px', overflow: 'hidden', position: 'relative' }}>
                 <div
                   style={{
                     width: `${Math.min(100, Math.max(0, pred ? pred.probability * 100 : 0))}%`,

@@ -28,9 +28,9 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
 
   return (
     <header style={{
-      background: 'rgba(13, 16, 23, 0.92)',
+      background: '#09090b',
       backdropFilter: 'blur(16px)',
-      border: '1px solid #1e2433',
+      border: '1px solid #27272a',
       borderRadius: '16px',
       padding: '16px 20px',
       display: 'flex',
@@ -86,10 +86,10 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
-            background: '#08090c',
+            background: '#000000',
             padding: '4px',
             borderRadius: '8px',
-            border: '1px solid #1e2433',
+            border: '1px solid #27272a',
             fontFamily: 'JetBrains Mono, monospace',
             fontSize: '0.75rem'
           }}>
@@ -99,7 +99,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 padding: '4px 10px',
                 borderRadius: '6px',
                 border: selectedTarget === 'lad' ? '1px solid rgba(0, 229, 255, 0.4)' : '1px solid transparent',
-                background: selectedTarget === 'lad' ? '#171c28' : 'transparent',
+                background: selectedTarget === 'lad' ? '#18181b' : 'transparent',
                 color: selectedTarget === 'lad' ? '#00e5ff' : '#94a3b8',
                 fontWeight: selectedTarget === 'lad' ? 700 : 500,
                 cursor: 'pointer'
@@ -113,7 +113,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 padding: '4px 10px',
                 borderRadius: '6px',
                 border: selectedTarget === 'lcx' ? '1px solid rgba(0, 229, 255, 0.4)' : '1px solid transparent',
-                background: selectedTarget === 'lcx' ? '#171c28' : 'transparent',
+                background: selectedTarget === 'lcx' ? '#18181b' : 'transparent',
                 color: selectedTarget === 'lcx' ? '#00e5ff' : '#94a3b8',
                 fontWeight: selectedTarget === 'lcx' ? 700 : 500,
                 cursor: 'pointer'
@@ -127,7 +127,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 padding: '4px 10px',
                 borderRadius: '6px',
                 border: selectedTarget === 'rca' ? '1px solid rgba(0, 229, 255, 0.4)' : '1px solid transparent',
-                background: selectedTarget === 'rca' ? '#171c28' : 'transparent',
+                background: selectedTarget === 'rca' ? '#18181b' : 'transparent',
                 color: selectedTarget === 'rca' ? '#00e5ff' : '#94a3b8',
                 fontWeight: selectedTarget === 'rca' ? 700 : 500,
                 cursor: 'pointer'
@@ -141,7 +141,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 padding: '4px 10px',
                 borderRadius: '6px',
                 border: selectedTarget === 'cad' ? '1px solid rgba(0, 229, 255, 0.4)' : '1px solid transparent',
-                background: selectedTarget === 'cad' ? '#171c28' : 'transparent',
+                background: selectedTarget === 'cad' ? '#18181b' : 'transparent',
                 color: selectedTarget === 'cad' ? '#00e5ff' : '#788796',
                 fontWeight: selectedTarget === 'cad' ? 700 : 500,
                 cursor: 'pointer'
@@ -161,8 +161,8 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              background: '#121620',
-              border: '1px solid #1e2433',
+              background: '#18181b',
+              border: '1px solid #27272a',
               borderRadius: '20px',
               padding: '5px 12px',
               fontSize: '0.75rem',
@@ -209,8 +209,8 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             width: '32px',
             height: '32px',
             borderRadius: '50%',
-            background: '#1c2230',
-            border: '1px solid #1e2433',
+            background: '#18181b',
+            border: '1px solid #27272a',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -226,13 +226,13 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
 
       {/* Pipeline Navigation Ribbon */}
       <div style={{
-        background: '#08090c',
+        background: '#000000',
         borderRadius: '8px',
         padding: '6px 12px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        border: '1px solid #1e2433',
+        border: '1px solid #27272a',
         fontSize: '0.72rem',
         fontFamily: 'JetBrains Mono, monospace',
         overflowX: 'auto',

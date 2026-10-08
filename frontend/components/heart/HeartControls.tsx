@@ -33,17 +33,17 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
         gap: '8px',
         alignItems: 'center',
         padding: '8px 12px',
-        background: '#ffffff',
-        border: '1px solid #e2e8f0',
+        background: '#09090b',
+        border: '1px solid #27272a',
         borderRadius: '8px',
         width: '100%',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.5)'
       }}
     >
       {/* PVC Origin Select */}
       {showPvcHotspots && onSelectPvcOrigin && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <label htmlFor="pvc-select" style={{ fontSize: '13px', fontWeight: 600, color: '#334155' }}>
+          <label htmlFor="pvc-select" style={{ fontSize: '13px', fontWeight: 600, color: '#a1a1aa' }}>
             PVC Origin:
           </label>
           <select
@@ -51,10 +51,10 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
             value={selectedPvcOrigin || ''}
             onChange={(e) => onSelectPvcOrigin(e.target.value || null)}
             style={{
-              background: '#f8fafc',
-              border: '1px solid #cbd5e1',
+              background: '#18181b',
+              border: '1px solid #27272a',
               borderRadius: '6px',
-              color: '#0f172a',
+              color: '#f8fafc',
               padding: '4px 10px',
               fontSize: '13px',
               cursor: 'pointer',
@@ -73,7 +73,7 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
 
       {/* Right Controls */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'auto' }}>
-        <span style={{ fontSize: '12px', color: '#64748b' }}>View:</span>
+        <span style={{ fontSize: '12px', color: '#a1a1aa' }}>View:</span>
         {onSetCameraPreset && (
           <div style={{ display: 'flex', gap: '2px' }}>
             <button
@@ -81,9 +81,9 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
               style={{
                 padding: '4px 8px',
                 borderRadius: '4px',
-                border: '1px solid #e2e8f0',
-                background: '#f8fafc',
-                color: '#334155',
+                border: '1px solid #27272a',
+                background: '#18181b',
+                color: '#e4e4e7',
                 fontSize: '12px',
                 cursor: 'pointer'
               }}
@@ -95,9 +95,9 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
               style={{
                 padding: '4px 8px',
                 borderRadius: '4px',
-                border: '1px solid #e2e8f0',
-                background: '#f8fafc',
-                color: '#334155',
+                border: '1px solid #27272a',
+                background: '#18181b',
+                color: '#e4e4e7',
                 fontSize: '12px',
                 cursor: 'pointer'
               }}
@@ -109,9 +109,9 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
               style={{
                 padding: '4px 8px',
                 borderRadius: '4px',
-                border: '1px solid #e2e8f0',
-                background: '#f8fafc',
-                color: '#334155',
+                border: '1px solid #27272a',
+                background: '#18181b',
+                color: '#e4e4e7',
                 fontSize: '12px',
                 cursor: 'pointer'
               }}
@@ -123,9 +123,9 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
               style={{
                 padding: '4px 8px',
                 borderRadius: '4px',
-                border: '1px solid #e2e8f0',
-                background: '#f8fafc',
-                color: '#334155',
+                border: '1px solid #27272a',
+                background: '#18181b',
+                color: '#e4e4e7',
                 fontSize: '12px',
                 cursor: 'pointer'
               }}
@@ -142,9 +142,9 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
             style={{
               padding: '4px 10px',
               borderRadius: '4px',
-              border: '1px solid #cbd5e1',
-              background: showPvcHotspots ? '#eff6ff' : '#f8fafc',
-              color: showPvcHotspots ? '#1d4ed8' : '#64748b',
+              border: '1px solid #27272a',
+              background: showPvcHotspots ? 'rgba(56, 189, 248, 0.15)' : '#18181b',
+              color: showPvcHotspots ? '#38bdf8' : '#a1a1aa',
               fontSize: '12px',
               fontWeight: 500,
               cursor: 'pointer'
@@ -161,9 +161,9 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
             style={{
               padding: '4px 10px',
               borderRadius: '4px',
-              border: '1px solid #cbd5e1',
-              background: enableHeartbeat ? '#fef2f2' : '#f8fafc',
-              color: enableHeartbeat ? '#b91c1c' : '#64748b',
+              border: '1px solid #27272a',
+              background: enableHeartbeat ? 'rgba(239, 68, 68, 0.15)' : '#18181b',
+              color: enableHeartbeat ? '#f87171' : '#a1a1aa',
               fontSize: '12px',
               fontWeight: 500,
               cursor: 'pointer'
@@ -179,9 +179,9 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
           style={{
             padding: '4px 10px',
             borderRadius: '4px',
-            border: '1px solid #cbd5e1',
-            background: '#f8fafc',
-            color: '#334155',
+            border: '1px solid #27272a',
+            background: '#18181b',
+            color: '#e4e4e7',
             fontSize: '12px',
             fontWeight: 500,
             cursor: 'pointer'

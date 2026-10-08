@@ -70,13 +70,13 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
       <div style={{
         height,
         width: '100%',
-        background: '#f8fafc',
+        background: '#09090b',
         borderRadius: '8px',
-        border: '1px solid #e2e8f0',
+        border: '1px solid #27272a',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: '#64748b',
+        color: '#94a3b8',
         fontSize: '13px'
       }}>
         Loading 3D Anatomy Model...
@@ -113,13 +113,13 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
         position: 'relative',
         width: '100%',
         height: height,
-        background: '#f1f5f9',
+        background: '#000000',
         borderRadius: '8px',
-        border: '1px solid #cbd5e1',
+        border: '1px solid #27272a',
         overflow: 'hidden'
       }}>
         {loading && (
-          <div style={{ position: 'absolute', inset: 0, background: 'rgba(255, 255, 255, 0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, color: '#0f172a', fontSize: '13px', fontWeight: 500 }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, color: '#f8fafc', fontSize: '13px', fontWeight: 500 }}>
             Loading model...
           </div>
         )}

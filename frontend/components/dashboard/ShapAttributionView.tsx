@@ -34,9 +34,8 @@ export const ShapAttributionView: React.FC<ShapAttributionViewProps> = ({
 
   return (
     <div style={{
-      background: 'rgba(15, 23, 42, 0.75)',
-      backdropFilter: 'blur(12px)',
-      border: '1px solid rgba(51, 65, 85, 0.8)',
+      background: '#09090b',
+      border: '1px solid #27272a',
       borderRadius: '16px',
       padding: '20px',
       display: 'flex',
@@ -56,7 +55,7 @@ export const ShapAttributionView: React.FC<ShapAttributionViewProps> = ({
         </div>
 
         {/* Target Tabs */}
-        <div style={{ display: 'flex', gap: '4px', background: '#1e293b', padding: '3px', borderRadius: '8px', border: '1px solid #334155' }}>
+        <div style={{ display: 'flex', gap: '4px', background: '#18181b', padding: '3px', borderRadius: '8px', border: '1px solid #27272a' }}>
           {(['cad', 'lad', 'lcx', 'rca'] as const).map((target) => (
             <button
               key={target}
@@ -82,8 +81,8 @@ export const ShapAttributionView: React.FC<ShapAttributionViewProps> = ({
 
       {/* 2. Metadata Banner */}
       <div style={{
-        background: '#1e293b',
-        border: '1px solid #334155',
+        background: '#18181b',
+        border: '1px solid #27272a',
         borderRadius: '10px',
         padding: '10px 14px',
         display: 'grid',
@@ -139,8 +138,8 @@ export const ShapAttributionView: React.FC<ShapAttributionViewProps> = ({
               <div
                 key={idx}
                 style={{
-                  background: '#1e293b',
-                  border: '1px solid #334155',
+                  background: '#18181b',
+                  border: '1px solid #27272a',
                   borderRadius: '8px',
                   padding: '10px 12px',
                   display: 'flex',
@@ -152,7 +151,7 @@ export const ShapAttributionView: React.FC<ShapAttributionViewProps> = ({
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{
-                      background: '#0f172a',
+                      background: '#000000',
                       color: '#94a3b8',
                       fontSize: '0.65rem',
                       fontWeight: 800,
@@ -185,7 +184,7 @@ export const ShapAttributionView: React.FC<ShapAttributionViewProps> = ({
                 </div>
 
                 {/* Contribution Visual Bar */}
-                <div style={{ background: '#0f172a', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
+                <div style={{ background: '#000000', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
                   <div
                     style={{
                       width: `${barWidthPercent}%`,
@@ -210,7 +209,7 @@ export const ShapAttributionView: React.FC<ShapAttributionViewProps> = ({
       </div>
 
       {/* 4. Disclaimer Note */}
-      <div style={{ fontSize: '0.68rem', color: '#64748b', borderTop: '1px solid #334155', paddingTop: '8px' }}>
+      <div style={{ fontSize: '0.68rem', color: '#64748b', borderTop: '1px solid #27272a', paddingTop: '8px' }}>
         ℹ️ {currentExp.disclaimer}
       </div>
     </div>

@@ -17,9 +17,9 @@ export const VesselInteraction: React.FC<VesselInteractionProps> = ({
       <div
         style={{
           padding: '20px',
-          background: '#1e293b',
+          background: '#09090b',
           borderRadius: '12px',
-          border: '1px dashed #475569',
+          border: '1px dashed #27272a',
           color: '#94a3b8',
           textAlign: 'center',
           fontSize: '0.9rem'
@@ -41,11 +41,11 @@ export const VesselInteraction: React.FC<VesselInteractionProps> = ({
     <div
       style={{
         padding: '20px',
-        background: '#1e293b',
+        background: '#09090b',
         borderRadius: '12px',
         border: '1px solid #38bdf8',
         color: '#f8fafc',
-        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
@@ -82,7 +82,7 @@ export const VesselInteraction: React.FC<VesselInteractionProps> = ({
           gridTemplateColumns: '1fr 1fr',
           gap: '12px',
           padding: '12px',
-          background: '#0f172a',
+          background: '#000000',
           borderRadius: '8px',
           marginBottom: '16px'
         }}
@@ -106,7 +106,7 @@ export const VesselInteraction: React.FC<VesselInteractionProps> = ({
         </div>
       </div>
 
-      <div style={{ fontSize: '0.75rem', color: '#64748b', borderTop: '1px solid #334155', paddingTop: '10px' }}>
+      <div style={{ fontSize: '0.75rem', color: '#64748b', borderTop: '1px solid #27272a', paddingTop: '10px' }}>
         ℹ️ <em>{data.disclaimer}</em>
       </div>
     </div>

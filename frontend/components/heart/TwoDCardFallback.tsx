@@ -16,7 +16,7 @@ export const TwoDCardFallback: React.FC<TwoDCardFallbackProps> = ({
   const vessels: VesselName[] = ['lad', 'lcx', 'rca'];
 
   return (
-    <div style={{ padding: '16px', background: '#0f172a', borderRadius: '12px', color: '#f8fafc' }}>
+    <div style={{ padding: '16px', background: '#000000', borderRadius: '12px', color: '#f8fafc' }}>
       <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '12px', color: '#94a3b8' }}>
         Coronary Vessel Risk Summary (2D View)
       </h3>
@@ -35,8 +35,8 @@ export const TwoDCardFallback: React.FC<TwoDCardFallbackProps> = ({
               style={{
                 padding: '16px',
                 borderRadius: '8px',
-                border: isSelected ? '2px solid #38bdf8' : '1px solid #334155',
-                background: isSelected ? '#1e293b' : '#1e293b80',
+                border: isSelected ? '2px solid #38bdf8' : '1px solid #27272a',
+                background: isSelected ? '#18181b' : '#09090b',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}

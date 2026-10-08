@@ -29,9 +29,8 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
 
   return (
     <div style={{
-      background: 'rgba(15, 23, 42, 0.75)',
-      backdropFilter: 'blur(12px)',
-      border: '1px solid rgba(51, 65, 85, 0.8)',
+      background: '#09090b',
+      border: '1px solid #27272a',
       borderRadius: '16px',
       padding: '20px',
       display: 'flex',
@@ -72,9 +71,9 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 key={preset.id}
                 onClick={() => onSelectPreset(preset.id)}
                 style={{
-                  background: isSelected ? '#0284c7' : 'rgba(30, 41, 59, 0.8)',
-                  color: isSelected ? '#ffffff' : '#94a3b8',
-                  border: isSelected ? '1px solid #38bdf8' : '1px solid #334155',
+                  background: isSelected ? '#0284c7' : '#18181b',
+                  color: isSelected ? '#ffffff' : '#a1a1aa',
+                  border: isSelected ? '1px solid #38bdf8' : '1px solid #27272a',
                   borderRadius: '8px',
                   padding: '6px 12px',
                   fontSize: '0.75rem',
@@ -104,7 +103,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
       </div>
 
       {/* 2. Category Tabs */}
-      <div style={{ display: 'flex', borderBottom: '1px solid #334155', gap: '4px' }}>
+      <div style={{ display: 'flex', borderBottom: '1px solid #27272a', gap: '4px' }}>
         {[
           { id: 'symptoms', label: 'Symptoms & History' },
           { id: 'ecg_echo', label: 'ECG & Echo' },
@@ -136,7 +135,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
         {activeTab === 'symptoms' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
             {/* Typical Chest Pain */}
-            <div style={{ background: '#1e293b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Typical Angina</span>
                 <input
@@ -150,7 +149,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
             </div>
 
             {/* Dyspnea */}
-            <div style={{ background: '#1e293b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Dyspnea</span>
                 <input
@@ -164,7 +163,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
             </div>
 
             {/* Diabetes Mellitus */}
-            <div style={{ background: '#1e293b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Diabetes (DM)</span>
                 <input
@@ -178,7 +177,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
             </div>
 
             {/* Hypertension */}
-            <div style={{ background: '#1e293b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Hypertension (HTN)</span>
                 <input
@@ -192,7 +191,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
             </div>
 
             {/* Current Smoker */}
-            <div style={{ background: '#1e293b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Current Smoker</span>
                 <input
@@ -206,7 +205,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
             </div>
 
             {/* Family History */}
-            <div style={{ background: '#1e293b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px 12px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Family History (FH)</span>
                 <input
@@ -225,7 +224,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
         {activeTab === 'ecg_echo' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {/* EF_TTE Slider */}
-            <div style={{ background: '#1e293b', padding: '12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '12px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Ejection Fraction (EF_TTE)</span>
                 <span style={{ fontSize: '0.85rem', fontWeight: 800, color: patient.EF_TTE < 50 ? '#ef4444' : '#10b981' }}>
@@ -248,7 +247,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
 
             {/* ECG Checks Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#1e293b', padding: '8px 10px', borderRadius: '6px', border: '1px solid #334155', cursor: 'pointer' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#18181b', padding: '8px 10px', borderRadius: '6px', border: '1px solid #27272a', cursor: 'pointer' }}>
                 <input
                   type="checkbox"
                   checked={patient.St_Depression === 1}
@@ -258,7 +257,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>ST Depression</span>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#1e293b', padding: '8px 10px', borderRadius: '6px', border: '1px solid #334155', cursor: 'pointer' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#18181b', padding: '8px 10px', borderRadius: '6px', border: '1px solid #27272a', cursor: 'pointer' }}>
                 <input
                   type="checkbox"
                   checked={patient.Tinversion === 1}
@@ -268,7 +267,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>T-Inversion</span>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#1e293b', padding: '8px 10px', borderRadius: '6px', border: '1px solid #334155', cursor: 'pointer' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#18181b', padding: '8px 10px', borderRadius: '6px', border: '1px solid #27272a', cursor: 'pointer' }}>
                 <input
                   type="checkbox"
                   checked={patient.Q_Wave === 1}
@@ -278,7 +277,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>Pathological Q-Wave</span>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#1e293b', padding: '8px 10px', borderRadius: '6px', border: '1px solid #334155', cursor: 'pointer' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#18181b', padding: '8px 10px', borderRadius: '6px', border: '1px solid #27272a', cursor: 'pointer' }}>
                 <input
                   type="checkbox"
                   checked={patient.Poor_R_Progression === 1}
@@ -294,7 +293,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
         {/* TAB: Labs & Biomarkers */}
         {activeTab === 'labs' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-            <div style={{ background: '#1e293b', padding: '10px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>
                 Fasting Blood Sugar (FBS)
               </label>
@@ -302,12 +301,12 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 type="number"
                 value={patient.FBS}
                 onChange={(e) => onUpdateField('FBS', Number(e.target.value))}
-                style={{ width: '100%', background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
+                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
               />
-              <span style={{ fontSize: '0.65rem', color: '#64748b' }}>mg/dL (Normal &lt;100)</span>
+              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mg/dL (Normal &lt;100)</span>
             </div>
 
-            <div style={{ background: '#1e293b', padding: '10px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>
                 LDL Cholesterol
               </label>
@@ -315,12 +314,12 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 type="number"
                 value={patient.LDL}
                 onChange={(e) => onUpdateField('LDL', Number(e.target.value))}
-                style={{ width: '100%', background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
+                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
               />
-              <span style={{ fontSize: '0.65rem', color: '#64748b' }}>mg/dL (Target &lt;100)</span>
+              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mg/dL (Target &lt;100)</span>
             </div>
 
-            <div style={{ background: '#1e293b', padding: '10px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>
                 HDL Cholesterol
               </label>
@@ -328,12 +327,12 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 type="number"
                 value={patient.HDL}
                 onChange={(e) => onUpdateField('HDL', Number(e.target.value))}
-                style={{ width: '100%', background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
+                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
               />
-              <span style={{ fontSize: '0.65rem', color: '#64748b' }}>mg/dL (Target &gt;40/50)</span>
+              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mg/dL (Target &gt;40/50)</span>
             </div>
 
-            <div style={{ background: '#1e293b', padding: '10px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>
                 Triglycerides (TG)
               </label>
@@ -341,9 +340,9 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 type="number"
                 value={patient.TG}
                 onChange={(e) => onUpdateField('TG', Number(e.target.value))}
-                style={{ width: '100%', background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
+                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
               />
-              <span style={{ fontSize: '0.65rem', color: '#64748b' }}>mg/dL (Normal &lt;150)</span>
+              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mg/dL (Normal &lt;150)</span>
             </div>
           </div>
         )}
@@ -351,7 +350,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
         {/* TAB: Demographics & Vitals */}
         {activeTab === 'demographics' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-            <div style={{ background: '#1e293b', padding: '10px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Age (Years)</label>
               <input
                 type="number"
@@ -359,42 +358,42 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
                 min="20"
                 max="95"
                 onChange={(e) => onUpdateField('Age', Number(e.target.value))}
-                style={{ width: '100%', background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
+                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
               />
             </div>
 
-            <div style={{ background: '#1e293b', padding: '10px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Biological Sex</label>
               <select
                 value={patient.Sex}
                 onChange={(e) => onUpdateField('Sex', e.target.value)}
-                style={{ width: '100%', background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
+                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>
             </div>
 
-            <div style={{ background: '#1e293b', padding: '10px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Systolic Blood Pressure</label>
               <input
                 type="number"
                 value={patient.BP}
                 onChange={(e) => onUpdateField('BP', Number(e.target.value))}
-                style={{ width: '100%', background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
+                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
               />
-              <span style={{ fontSize: '0.65rem', color: '#64748b' }}>mmHg</span>
+              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mmHg</span>
             </div>
 
-            <div style={{ background: '#1e293b', padding: '10px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Pulse Rate (PR)</label>
               <input
                 type="number"
                 value={patient.PR}
                 onChange={(e) => onUpdateField('PR', Number(e.target.value))}
-                style={{ width: '100%', background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
+                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
               />
-              <span style={{ fontSize: '0.65rem', color: '#64748b' }}>bpm</span>
+              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>bpm</span>
             </div>
           </div>
         )}
@@ -407,7 +406,7 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
         style={{
           marginTop: '4px',
           padding: '12px',
-          background: loading ? '#475569' : 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+          background: loading ? '#27272a' : 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
           border: 'none',
           borderRadius: '10px',
           color: '#f8fafc',
