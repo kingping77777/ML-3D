@@ -1,20 +1,30 @@
 import React from 'react';
 import { VesselName } from '../../types/predictions';
-import { VESSEL_MAPPINGS } from './heartMapping';
+import { pvcOrigins } from './pvcOrigins';
 
 interface HeartControlsProps {
   selectedVessel: VesselName | null;
   onSelectVessel: (vessel: VesselName | null) => void;
+  selectedPvcOrigin?: string | null;
+  onSelectPvcOrigin?: (originId: string | null) => void;
   onResetView: () => void;
+  onSetCameraPreset?: (preset: 'anterior' | 'lcx' | 'rca' | 'posterior') => void;
+  enableHeartbeat?: boolean;
+  onToggleHeartbeat?: () => void;
+  showPvcHotspots?: boolean;
+  onTogglePvcHotspots?: () => void;
 }
 
 export const HeartControls: React.FC<HeartControlsProps> = ({
-  selectedVessel,
-  onSelectVessel,
-  onResetView
+  selectedPvcOrigin,
+  onSelectPvcOrigin,
+  onResetView,
+  onSetCameraPreset,
+  enableHeartbeat = true,
+  onToggleHeartbeat,
+  showPvcHotspots = true,
+  onTogglePvcHotspots
 }) => {
-  const vessels: VesselName[] = ['lad', 'lcx', 'rca'];
-
   return (
     <div
       style={{
@@ -23,75 +33,161 @@ export const HeartControls: React.FC<HeartControlsProps> = ({
         gap: '8px',
         alignItems: 'center',
         padding: '8px 12px',
-        background: '#1e293b',
+        background: '#ffffff',
+        border: '1px solid #e2e8f0',
         borderRadius: '8px',
-        border: '1px solid #334155'
+        width: '100%',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
       }}
     >
-      <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>
-        Select Vessel:
-      </span>
-
-      {vessels.map((vesselKey) => {
-        const isSelected = selectedVessel === vesselKey;
-        const mapping = VESSEL_MAPPINGS[vesselKey];
-
-        return (
-          <button
-            key={vesselKey}
-            onClick={() => onSelectVessel(isSelected ? null : vesselKey)}
+      {/* PVC Origin Select */}
+      {showPvcHotspots && onSelectPvcOrigin && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <label htmlFor="pvc-select" style={{ fontSize: '13px', fontWeight: 600, color: '#334155' }}>
+            PVC Origin:
+          </label>
+          <select
+            id="pvc-select"
+            value={selectedPvcOrigin || ''}
+            onChange={(e) => onSelectPvcOrigin(e.target.value || null)}
             style={{
-              padding: '6px 12px',
+              background: '#f8fafc',
+              border: '1px solid #cbd5e1',
               borderRadius: '6px',
-              border: isSelected ? '1px solid #38bdf8' : '1px solid #475569',
-              background: isSelected ? '#0284c7' : '#334155',
-              color: '#f8fafc',
-              fontSize: '0.85rem',
-              fontWeight: 600,
+              color: '#0f172a',
+              padding: '4px 10px',
+              fontSize: '13px',
               cursor: 'pointer',
-              transition: 'all 0.15s ease'
+              outline: 'none'
             }}
           >
-            {mapping.label}
-          </button>
-        );
-      })}
-
-      {selectedVessel && (
-        <button
-          onClick={() => onSelectVessel(null)}
-          style={{
-            padding: '6px 10px',
-            borderRadius: '6px',
-            border: '1px solid #475569',
-            background: 'transparent',
-            color: '#94a3b8',
-            fontSize: '0.8rem',
-            cursor: 'pointer'
-          }}
-        >
-          Clear Selection
-        </button>
+            <option value="">Select origin point...</option>
+            {pvcOrigins.map((orig) => (
+              <option key={orig.id} value={orig.id}>
+                {orig.name} ({orig.category})
+              </option>
+            ))}
+          </select>
+        </div>
       )}
 
-      <div style={{ marginLeft: 'auto' }}>
+      {/* Right Controls */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'auto' }}>
+        <span style={{ fontSize: '12px', color: '#64748b' }}>View:</span>
+        {onSetCameraPreset && (
+          <div style={{ display: 'flex', gap: '2px' }}>
+            <button
+              onClick={() => onSetCameraPreset('anterior')}
+              style={{
+                padding: '4px 8px',
+                borderRadius: '4px',
+                border: '1px solid #e2e8f0',
+                background: '#f8fafc',
+                color: '#334155',
+                fontSize: '12px',
+                cursor: 'pointer'
+              }}
+            >
+              Anterior
+            </button>
+            <button
+              onClick={() => onSetCameraPreset('lcx')}
+              style={{
+                padding: '4px 8px',
+                borderRadius: '4px',
+                border: '1px solid #e2e8f0',
+                background: '#f8fafc',
+                color: '#334155',
+                fontSize: '12px',
+                cursor: 'pointer'
+              }}
+            >
+              Left
+            </button>
+            <button
+              onClick={() => onSetCameraPreset('rca')}
+              style={{
+                padding: '4px 8px',
+                borderRadius: '4px',
+                border: '1px solid #e2e8f0',
+                background: '#f8fafc',
+                color: '#334155',
+                fontSize: '12px',
+                cursor: 'pointer'
+              }}
+            >
+              Right
+            </button>
+            <button
+              onClick={() => onSetCameraPreset('posterior')}
+              style={{
+                padding: '4px 8px',
+                borderRadius: '4px',
+                border: '1px solid #e2e8f0',
+                background: '#f8fafc',
+                color: '#334155',
+                fontSize: '12px',
+                cursor: 'pointer'
+              }}
+            >
+              Posterior
+            </button>
+          </div>
+        )}
+
+        {/* Hotspots Toggle */}
+        {onTogglePvcHotspots && (
+          <button
+            onClick={onTogglePvcHotspots}
+            style={{
+              padding: '4px 10px',
+              borderRadius: '4px',
+              border: '1px solid #cbd5e1',
+              background: showPvcHotspots ? '#eff6ff' : '#f8fafc',
+              color: showPvcHotspots ? '#1d4ed8' : '#64748b',
+              fontSize: '12px',
+              fontWeight: 500,
+              cursor: 'pointer'
+            }}
+          >
+            {showPvcHotspots ? 'Markers: ON' : 'Markers: OFF'}
+          </button>
+        )}
+
+        {/* Heartbeat Toggle */}
+        {onToggleHeartbeat && (
+          <button
+            onClick={onToggleHeartbeat}
+            style={{
+              padding: '4px 10px',
+              borderRadius: '4px',
+              border: '1px solid #cbd5e1',
+              background: enableHeartbeat ? '#fef2f2' : '#f8fafc',
+              color: enableHeartbeat ? '#b91c1c' : '#64748b',
+              fontSize: '12px',
+              fontWeight: 500,
+              cursor: 'pointer'
+            }}
+          >
+            {enableHeartbeat ? 'Beat: ON' : 'Beat: OFF'}
+          </button>
+        )}
+
+        {/* Reset Camera */}
         <button
           onClick={onResetView}
           style={{
-            padding: '6px 12px',
-            borderRadius: '6px',
-            border: '1px solid #38bdf8',
-            background: 'rgba(56, 189, 248, 0.1)',
-            color: '#38bdf8',
-            fontSize: '0.85rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px'
+            padding: '4px 10px',
+            borderRadius: '4px',
+            border: '1px solid #cbd5e1',
+            background: '#f8fafc',
+            color: '#334155',
+            fontSize: '12px',
+            fontWeight: 500,
+            cursor: 'pointer'
           }}
         >
-          🔄 Reset View
+          Reset View
         </button>
       </div>
     </div>

@@ -3,52 +3,54 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { PredictionResponse, VesselName } from '../../types/predictions';
 import { HeartModel } from './HeartModel';
 import { HeartControls } from './HeartControls';
-import { VesselInteraction } from './VesselInteraction';
-import { WebGLFallback } from './WebGLFallback';
+import { PvcDetailsCard } from './PvcDetailsCard';
+import { pvcOrigins } from './pvcOrigins';
 
 interface HeartViewerProps {
   data: PredictionResponse | null;
   loading?: boolean;
   error?: string | null;
-  isMock?: boolean;
-  onToggleMock?: () => void;
   selectedVessel?: VesselName | null;
   onSelectVessel?: (vessel: VesselName | null) => void;
   height?: string;
-  hideDetails?: boolean;
-}
-
-function checkWebGLSupport(): boolean {
-  if (typeof window === 'undefined') return true;
-  try {
-    const canvas = document.createElement('canvas');
-    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
-  } catch (e) {
-    return false;
-  }
 }
 
 export const HeartViewer: React.FC<HeartViewerProps> = ({
   data,
   loading = false,
   error = null,
-  isMock = false,
-  onToggleMock,
   selectedVessel: externalSelectedVessel,
   onSelectVessel: externalOnSelectVessel,
-  height = '420px',
-  hideDetails = false
+  height = '500px'
 }) => {
+  const [mounted, setMounted] = useState<boolean>(false);
   const [internalSelectedVessel, setInternalSelectedVessel] = useState<VesselName | null>(null);
-  const [hoveredVessel, setHoveredVessel] = useState<{ key: VesselName; pos: { x: number; y: number } } | null>(null);
-  const [webglSupported, setWebglSupported] = useState<boolean>(true);
-  const [force2DView, setForce2DView] = useState<boolean>(false);
+  const [selectedPvcOrigin, setSelectedPvcOrigin] = useState<string | null>(null);
+  const [showPvcHotspots, setShowPvcHotspots] = useState<boolean>(true);
+  const [enableHeartbeat, setEnableHeartbeat] = useState<boolean>(true);
 
-  const controlsRef = useRef<OrbitControlsImpl>(null);
+  const controlsRef = useRef<any>(null);
+
+  const handleSetCameraPreset = (preset: 'anterior' | 'lcx' | 'rca' | 'posterior') => {
+    if (controlsRef.current) {
+      if (preset === 'anterior') {
+        controlsRef.current.setAzimuthalAngle(0);
+        controlsRef.current.setPolarAngle(Math.PI / 2);
+      } else if (preset === 'lcx') {
+        controlsRef.current.setAzimuthalAngle(-Math.PI * 0.4);
+        controlsRef.current.setPolarAngle(Math.PI / 2);
+      } else if (preset === 'rca') {
+        controlsRef.current.setAzimuthalAngle(Math.PI * 0.4);
+        controlsRef.current.setPolarAngle(Math.PI / 2);
+      } else if (preset === 'posterior') {
+        controlsRef.current.setAzimuthalAngle(Math.PI);
+        controlsRef.current.setPolarAngle(Math.PI / 2);
+      }
+    }
+  };
 
   const activeSelectedVessel = externalSelectedVessel !== undefined ? externalSelectedVessel : internalSelectedVessel;
   const handleSelectVessel = (vessel: VesselName | null) => {
@@ -60,8 +62,27 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
   };
 
   useEffect(() => {
-    setWebglSupported(checkWebGLSupport());
+    setMounted(true);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div style={{
+        height,
+        width: '100%',
+        background: '#f8fafc',
+        borderRadius: '8px',
+        border: '1px solid #e2e8f0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#64748b',
+        fontSize: '13px'
+      }}>
+        Loading 3D Anatomy Model...
+      </div>
+    );
+  }
 
   const handleResetView = () => {
     if (controlsRef.current) {
@@ -69,128 +90,67 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
     }
   };
 
-  // If WebGL is unsupported or user forced 2D view, render 2D fallback
-  if (!webglSupported || force2DView) {
-    return (
-      <div style={{ padding: '16px', background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(51, 65, 85, 0.8)', borderRadius: '16px', color: '#f8fafc' }}>
-        <WebGLFallback
-          data={data!}
-          selectedVessel={activeSelectedVessel}
-          onSelectVessel={handleSelectVessel}
-          reason={!webglSupported ? 'WebGL is not supported by your browser/device.' : 'User toggled 2D mode.'}
-        />
-        <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
-          {webglSupported && (
-            <button
-              onClick={() => setForce2DView(false)}
-              style={{ padding: '6px 14px', background: '#38bdf8', border: 'none', borderRadius: '6px', color: '#0f172a', fontWeight: 700, cursor: 'pointer', fontSize: '0.8rem' }}
-            >
-              Switch to 3D View
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  }
+  const activePvcObject = pvcOrigins.find((p) => p.id === selectedPvcOrigin);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      {/* Controls Bar & View Modes */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
-        <HeartControls
-          selectedVessel={activeSelectedVessel}
-          onSelectVessel={handleSelectVessel}
-          onResetView={handleResetView}
-        />
-        <button
-          onClick={() => setForce2DView(true)}
-          style={{
-            padding: '6px 12px',
-            background: 'rgba(30, 41, 59, 0.8)',
-            border: '1px solid #334155',
-            borderRadius: '8px',
-            color: '#94a3b8',
-            fontSize: '0.75rem',
-            cursor: 'pointer',
-            whiteSpace: 'nowrap'
-          }}
-        >
-          2D Cards
-        </button>
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+      {/* Real, Clean Clinical Toolbar */}
+      <HeartControls
+        selectedVessel={activeSelectedVessel}
+        onSelectVessel={handleSelectVessel}
+        selectedPvcOrigin={selectedPvcOrigin}
+        onSelectPvcOrigin={(id) => setSelectedPvcOrigin(id)}
+        onResetView={handleResetView}
+        onSetCameraPreset={handleSetCameraPreset}
+        enableHeartbeat={enableHeartbeat}
+        onToggleHeartbeat={() => setEnableHeartbeat(!enableHeartbeat)}
+        showPvcHotspots={showPvcHotspots}
+        onTogglePvcHotspots={() => setShowPvcHotspots(!showPvcHotspots)}
+      />
 
-      {/* 3D Canvas Area */}
+      {/* 3D Canvas Area with Real Clean Neutral Background */}
       <div style={{
         position: 'relative',
         width: '100%',
         height: height,
-        background: 'radial-gradient(circle, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)',
-        borderRadius: '16px',
-        overflow: 'hidden',
-        border: '1px solid rgba(51, 65, 85, 0.8)',
-        boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.5)'
+        background: '#f1f5f9',
+        borderRadius: '8px',
+        border: '1px solid #cbd5e1',
+        overflow: 'hidden'
       }}>
-        {/* Loading Overlay */}
         {loading && (
-          <div style={{ position: 'absolute', inset: 0, background: 'rgba(15, 23, 42, 0.85)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 20, color: '#38bdf8' }}>
-            <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '6px' }}>Computing multi-vessel 3D heatmap...</div>
-            <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Dynamic coronary artery risk synthesis</div>
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(255, 255, 255, 0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, color: '#0f172a', fontSize: '13px', fontWeight: 500 }}>
+            Loading model...
           </div>
         )}
 
-        {/* Error Overlay */}
         {error && !loading && (
-          <div style={{ position: 'absolute', inset: 0, background: 'rgba(15, 23, 42, 0.95)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 20, padding: '24px', color: '#f43f5e' }}>
-            <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '6px' }}>⚠️ FastAPI Connection Error</div>
-            <div style={{ fontSize: '0.85rem', color: '#cbd5e1', textAlign: 'center', maxWidth: '420px', marginBottom: '14px' }}>{error}</div>
-            {onToggleMock && (
-              <button onClick={onToggleMock} style={{ padding: '6px 14px', background: '#eab308', border: 'none', borderRadius: '6px', color: '#0f172a', fontWeight: 700, cursor: 'pointer', fontSize: '0.8rem' }}>
-                Switch to Offline Simulation
-              </button>
-            )}
+          <div style={{ position: 'absolute', inset: 0, background: '#fef2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, padding: '16px', color: '#b91c1c', fontSize: '13px' }}>
+            {error}
           </div>
         )}
 
-        {/* Hover Tooltip */}
-        {hoveredVessel && data && (
-          <div
-            style={{
-              position: 'fixed',
-              left: `${hoveredVessel.pos.x + 12}px`,
-              top: `${hoveredVessel.pos.y - 32}px`,
-              background: 'rgba(15, 23, 42, 0.95)',
-              border: '1px solid #38bdf8',
-              padding: '6px 12px',
-              borderRadius: '6px',
-              color: '#f8fafc',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              pointerEvents: 'none',
-              zIndex: 30,
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)'
-            }}
-          >
-            {hoveredVessel.key.toUpperCase()} Model-Estimated Probability: {((data.visualization[hoveredVessel.key]?.probability ?? 0) * 100).toFixed(1)}%
-          </div>
-        )}
-
-        {/* Three.js R3F Canvas */}
         {data && (
           <Canvas
-            camera={{ position: [0, 0, 4.5], fov: 45 }}
-            gl={{ antialias: true, powerPreference: 'low-power' }}
+            camera={{ position: [0, 0, 4.0], fov: 45 }}
+            gl={{ antialias: true }}
             onPointerMissed={() => handleSelectVessel(null)}
           >
-            <ambientLight intensity={0.7} />
+            {/* Natural White Studio Illumination */}
+            <ambientLight intensity={1.1} />
             <directionalLight position={[5, 8, 5]} intensity={1.2} />
-            <directionalLight position={[-5, -5, -5]} intensity={0.4} />
+            <directionalLight position={[-5, 3, -5]} intensity={0.6} />
 
             <Suspense fallback={null}>
               <HeartModel
                 data={data}
                 selectedVessel={activeSelectedVessel}
+                selectedPvcOrigin={selectedPvcOrigin}
                 onSelectVessel={handleSelectVessel}
-                onHoverVessel={(key, ev) => setHoveredVessel(key && ev ? { key, pos: ev } : null)}
+                onSelectPvcOrigin={(id) => setSelectedPvcOrigin(id)}
+                onHoverVessel={() => {}}
+                enableHeartbeat={enableHeartbeat}
+                showPvcHotspots={showPvcHotspots}
               />
             </Suspense>
 
@@ -199,18 +159,18 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
               enablePan={true}
               enableZoom={true}
               enableRotate={true}
-              minDistance={2.5}
+              minDistance={2.0}
               maxDistance={8.0}
             />
           </Canvas>
         )}
       </div>
 
-      {/* Selected Vessel Interaction Card */}
-      {!hideDetails && data && activeSelectedVessel && (
-        <VesselInteraction
-          selectedVessel={activeSelectedVessel}
-          data={data}
+      {/* Clinical EP Details Card on Selection */}
+      {activePvcObject && (
+        <PvcDetailsCard
+          origin={activePvcObject}
+          onClose={() => setSelectedPvcOrigin(null)}
         />
       )}
     </div>

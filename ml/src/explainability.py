@@ -256,19 +256,27 @@ def explain_patient(target_name, model_obj, patient_row_df, X_raw_df, raw_featur
         raw_shap = explainer.shap_values(X_trans_patient)
         base_val = float(explainer.expected_value)
         explainer_name = "LinearExplainer"
-    elif "RandomForest" in clf_type:
+    elif any(t in clf_type for t in ["RandomForest", "ExtraTrees", "CatBoost", "GradientBoosting", "Tree", "Forest"]):
         explainer = shap.TreeExplainer(clf)
         raw_shap = explainer.shap_values(X_trans_patient)
         b_val = explainer.expected_value
         base_val = float(b_val[1]) if isinstance(b_val, (list, np.ndarray)) else float(b_val)
         explainer_name = "TreeExplainer"
     else:
-        bg_summary = shap.kmeans(preprocessor.transform(X_raw_df), 10)
-        explainer = shap.KernelExplainer(clf.predict_proba, bg_summary)
-        raw_shap = explainer.shap_values(X_trans_patient)
-        b_val = explainer.expected_value
-        base_val = float(b_val[1]) if isinstance(b_val, (list, np.ndarray)) else float(b_val)
-        explainer_name = "KernelExplainer"
+        # Fallback: try TreeExplainer first before resorting to KernelExplainer
+        try:
+            explainer = shap.TreeExplainer(clf)
+            raw_shap = explainer.shap_values(X_trans_patient)
+            b_val = explainer.expected_value
+            base_val = float(b_val[1]) if isinstance(b_val, (list, np.ndarray)) else float(b_val)
+            explainer_name = "TreeExplainer"
+        except Exception:
+            bg_summary = shap.kmeans(preprocessor.transform(X_raw_df), 10)
+            explainer = shap.KernelExplainer(clf.predict_proba, bg_summary)
+            raw_shap = explainer.shap_values(X_trans_patient)
+            b_val = explainer.expected_value
+            base_val = float(b_val[1]) if isinstance(b_val, (list, np.ndarray)) else float(b_val)
+            explainer_name = "KernelExplainer"
         
     shap_df_raw = aggregate_shap_to_raw_features(raw_shap, mapping, raw_features)
     patient_shap = shap_df_raw.iloc[0]

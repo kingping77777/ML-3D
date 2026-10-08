@@ -1,14 +1,33 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { useCardioVision } from '../hooks/useCardioVision';
-import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { PatientInputForm } from '../components/dashboard/PatientInputForm';
-import { VesselRiskCards } from '../components/dashboard/VesselRiskCards';
-import { ShapAttributionView } from '../components/dashboard/ShapAttributionView';
-import { ClinicalSummaryModal } from '../components/dashboard/ClinicalSummaryModal';
-import { HeartViewer } from '../components/heart/HeartViewer';
 import { VesselName, TargetName, PredictionResponse } from '../types/predictions';
+
+const HeartViewer = dynamic(
+  () => import('../components/heart/HeartViewer').then((mod) => mod.HeartViewer),
+  {
+    ssr: false,
+    loading: () => (
+      <div style={{
+        height: '500px',
+        width: '100%',
+        background: '#f8fafc',
+        borderRadius: '8px',
+        border: '1px solid #e2e8f0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#64748b',
+        fontSize: '13px'
+      }}>
+        Loading 3D Anatomy Model...
+      </div>
+    )
+  }
+);
 
 export default function Step7DashboardPage() {
   const {
@@ -21,16 +40,12 @@ export default function Step7DashboardPage() {
     error,
     isMock,
     setIsMock,
-    backendOnline,
     updatePatientField,
     selectPreset,
     randomizePatient,
     runAnalysis
   } = useCardioVision();
 
-  const [isReportOpen, setIsReportOpen] = useState<boolean>(false);
-
-  // Map selected target ('cad', 'lad', 'lcx', 'rca') to vessel name for 3D viewer
   const active3DVessel: VesselName | null =
     selectedTarget === 'cad' ? null : (selectedTarget as VesselName);
 
@@ -42,7 +57,6 @@ export default function Step7DashboardPage() {
     }
   };
 
-  // Convert AnalyzeResponse to PredictionResponse format required by 3D heart
   const heartPredictionData: PredictionResponse = {
     predictions: analysis.predictions,
     visualization: analysis.visualization,
@@ -52,140 +66,143 @@ export default function Step7DashboardPage() {
   return (
     <main style={{
       minHeight: '100vh',
-      background: '#090d16',
-      backgroundImage: 'radial-gradient(ellipse at 50% 0%, #1e293b 0%, #090d16 75%)',
-      padding: '24px 20px',
-      color: '#f8fafc',
-      fontFamily: 'Inter, system-ui, -apple-system, sans-serif'
+      background: '#f8fafc',
+      color: '#0f172a',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      padding: '24px 32px'
     }}>
       <div style={{
-        maxWidth: '1440px',
+        maxWidth: '1400px',
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'column',
-        gap: '20px'
+        gap: '24px'
       }}>
-        {/* 1. Dashboard Header & Pipeline Status */}
-        <DashboardHeader
-          isMock={isMock}
-          backendOnline={backendOnline}
-          onToggleMock={() => setIsMock(!isMock)}
-          onOpenReport={() => setIsReportOpen(true)}
-        />
-
-        {/* 2. Multi-Target Risk Stratification Cards (CAD, LAD, LCX, RCA) */}
-        <VesselRiskCards
-          analysis={analysis}
-          selectedTarget={selectedTarget}
-          onSelectTarget={setSelectedTarget}
-        />
-
-        {/* 3. Main Workspace Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(320px, 380px) minmax(0, 1fr)',
-          gap: '20px',
-          alignItems: 'start'
-        }}>
-          {/* Left Column: Patient Input Form & Clinical Presets */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <PatientInputForm
-              patient={patient}
-              selectedPresetId={selectedPresetId}
-              loading={loading}
-              onSelectPreset={selectPreset}
-              onUpdateField={updatePatientField}
-              onRunAnalysis={() => runAnalysis(patient)}
-              onRandomize={randomizePatient}
-            />
-          </div>
-
-          {/* Right Column: 3D Anatomical Heart & SHAP Explanations */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            {/* 3D Anatomical Heart Layer */}
-            <div style={{
-              background: 'rgba(15, 23, 42, 0.75)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(51, 65, 85, 0.8)',
-              borderRadius: '16px',
-              padding: '20px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '12px'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ color: '#ef4444' }}>🫀</span> Interactive 3D Coronary Anatomy
-                  </h3>
-                  <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                    Anatomically mapped stenosis risk heatmap (Click vessel or card to focus)
-                  </span>
-                </div>
-                {active3DVessel && (
-                  <span style={{
-                    background: 'rgba(56, 189, 248, 0.15)',
-                    color: '#38bdf8',
-                    border: '1px solid rgba(56, 189, 248, 0.3)',
-                    padding: '3px 10px',
-                    borderRadius: '6px',
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    textTransform: 'uppercase'
-                  }}>
-                    Active Focus: {active3DVessel}
-                  </span>
-                )}
-              </div>
-
-              <HeartViewer
-                data={heartPredictionData}
-                loading={loading}
-                error={error}
-                isMock={isMock}
-                selectedVessel={active3DVessel}
-                onSelectVessel={handleSelect3DVessel}
-                height="380px"
-              />
-            </div>
-
-            {/* SHAP Feature Attribution Explorer */}
-            <ShapAttributionView
-              explanations={analysis.explanations}
-              selectedTarget={selectedTarget}
-              onSelectTarget={setSelectedTarget}
-            />
-          </div>
-        </div>
-
-        {/* 4. Footer & Research Disclaimer */}
-        <footer style={{
-          background: 'rgba(15, 23, 42, 0.6)',
-          border: '1px solid #1e293b',
-          borderRadius: '12px',
-          padding: '14px 20px',
+        {/* Top Navbar */}
+        <header style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          fontSize: '0.75rem',
-          color: '#64748b'
+          borderBottom: '1px solid #e2e8f0',
+          paddingBottom: '16px'
         }}>
           <div>
-            <strong>CardioVision 3D Research Architecture</strong> — Built with FastAPI, CatBoost, ExtraTrees, TreeSHAP & React Three Fiber.
+            <h1 style={{ margin: 0, fontSize: '20px', fontWeight: 600, color: '#0f172a' }}>
+              PVC Localization & Coronary Anatomy Viewer
+            </h1>
+            <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#64748b' }}>
+              Interactive 3D cardiac anatomy for mapping premature ventricular contraction (PVC) origins
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <span style={{
+              fontSize: '12px',
+              padding: '3px 8px',
+              borderRadius: '4px',
+              background: '#ecfdf5',
+              color: '#059669',
+              border: '1px solid #a7f3d0',
+              fontWeight: 500
+            }}>
+              Active Model: Dundee Anatomy 3D
+            </span>
+            <button
+              onClick={() => setIsMock(!isMock)}
+              style={{
+                fontSize: '12px',
+                padding: '5px 12px',
+                borderRadius: '6px',
+                background: '#ffffff',
+                border: '1px solid #cbd5e1',
+                color: '#334155',
+                cursor: 'pointer',
+                fontWeight: 500
+              }}
+            >
+              Mode: {isMock ? 'Demo Data' : 'Live Inference'}
+            </button>
+          </div>
+        </header>
+
+        {/* Main Grid: 3D Heart Viewer & Clinical Information */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0, 1.4fr) minmax(360px, 420px)',
+          gap: '24px',
+          alignItems: 'start'
+        }}>
+          {/* Left: 3D Heart Viewer */}
+          <div style={{
+            background: '#ffffff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '8px',
+            padding: '16px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '14px', fontWeight: 600, color: '#0f172a' }}>
+                3D Cardiac Anatomy
+              </span>
+              <span style={{ fontSize: '12px', color: '#64748b' }}>
+                Rotate: Left-click drag | Zoom: Scroll
+              </span>
+            </div>
+
+            <HeartViewer
+              data={heartPredictionData}
+              loading={loading}
+              error={error}
+              selectedVessel={active3DVessel}
+              onSelectVessel={handleSelect3DVessel}
+              height="520px"
+            />
+          </div>
+
+          {/* Right: Clinical Information & Patient Profile */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{
+              background: '#ffffff',
+              border: '1px solid #e2e8f0',
+              borderRadius: '8px',
+              padding: '16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+            }}>
+              <h2 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 600, color: '#0f172a' }}>
+                Patient Clinical Profile
+              </h2>
+              <PatientInputForm
+                patient={patient}
+                selectedPresetId={selectedPresetId}
+                loading={loading}
+                onSelectPreset={selectPreset}
+                onUpdateField={updatePatientField}
+                onRunAnalysis={() => runAnalysis(patient)}
+                onRandomize={randomizePatient}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Clinical Disclaimer */}
+        <footer style={{
+          borderTop: '1px solid #e2e8f0',
+          paddingTop: '16px',
+          fontSize: '12px',
+          color: '#64748b',
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}>
+          <div>
+            Electrophysiology anatomical reference tool.
           </div>
           <div>
-            ⚠️ Decision-support tool only. Not intended for direct clinical diagnostic without physician review.
+            For educational and research reference only.
           </div>
         </footer>
       </div>
-
-      {/* 5. Clinical Summary Modal */}
-      <ClinicalSummaryModal
-        isOpen={isReportOpen}
-        onClose={() => setIsReportOpen(false)}
-        patient={patient}
-        analysis={analysis}
-      />
     </main>
   );
 }

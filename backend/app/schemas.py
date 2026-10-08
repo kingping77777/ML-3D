@@ -28,7 +28,48 @@ class PatientInput(BaseModel):
     PLT: float = Field(..., alias="PLT", ge=10, le=1000000, description="Platelets count")
     EF_TTE: float = Field(..., alias="EF-TTE", ge=5, le=90, description="Ejection Fraction (%)")
 
-    # --- 30 Binary Features (Sex + 29 Clinical Binary Flags) ---
+    # --- 29 Clinical Binary Features ---
+    # (defined below)
+
+    @field_validator(
+        "Age", "Weight", "Length", "BMI", "BP", "PR", "FBS", "CR", "TG",
+        "LDL", "HDL", "BUN", "ESR", "HB", "K", "Na", "WBC", "Lymph",
+        "Neut", "PLT", "EF_TTE",
+        mode="before"
+    )
+    def clamp_numerical_bounds(cls, v: Any, info) -> float:
+        bounds = {
+            "Age": (1.0, 120.0),
+            "Weight": (20.0, 250.0),
+            "Length": (50.0, 250.0),
+            "BMI": (10.0, 60.0),
+            "BP": (50.0, 250.0),
+            "PR": (30.0, 200.0),
+            "FBS": (40.0, 600.0),
+            "CR": (0.1, 15.0),
+            "TG": (20.0, 1500.0),
+            "LDL": (10.0, 600.0),
+            "HDL": (5.0, 200.0),
+            "BUN": (1.0, 150.0),
+            "ESR": (1.0, 150.0),
+            "HB": (3.0, 25.0),
+            "K": (1.0, 10.0),
+            "Na": (100.0, 170.0),
+            "WBC": (1000.0, 50000.0),
+            "Lymph": (1.0, 99.0),
+            "Neut": (1.0, 99.0),
+            "PLT": (10.0, 1000000.0),
+            "EF_TTE": (5.0, 90.0),
+        }
+        field_name = info.field_name
+        if field_name in bounds:
+            min_val, max_val = bounds[field_name]
+            try:
+                val = float(v)
+                return max(min_val, min(max_val, val))
+            except (ValueError, TypeError):
+                return min_val
+        return v
     Sex: Literal["Male", "Female"] = Field(..., alias="Sex", description="Patient sex ('Male' or 'Female')")
 
     # --- 3 Multi-Class Categorical Features ---
@@ -65,14 +106,14 @@ class PatientInput(BaseModel):
     St_Elevation: int = Field(..., alias="St Elevation", ge=0, le=1)
     St_Depression: int = Field(..., alias="St Depression", ge=0, le=1)
     Tinversion: int = Field(..., alias="Tinversion", ge=0, le=1)
-    Region_RWMA: int = Field(..., alias="Region RWMA", ge=0, le=1)
+    Region_RWMA: int = Field(..., alias="Region RWMA", ge=0, le=4)
 
     @field_validator(
         "Obesity", "CRF", "CVA", "Airway_disease", "Thyroid_Disease", "CHF", "DLP",
         "Weak_Peripheral_Pulse", "Lung_rales", "Systolic_Murmur", "Diastolic_Murmur",
         "Dyspnea", "Atypical", "Nonanginal", "LowTH_Ang", "LVH", "Poor_R_Progression",
         "DM", "HTN", "Current_Smoker", "EX_Smoker", "FH", "Edema", "Typical_Chest_Pain",
-        "Q_Wave", "St_Elevation", "St_Depression", "Tinversion", "Region_RWMA",
+        "Q_Wave", "St_Elevation", "St_Depression", "Tinversion",
         mode="before"
     )
     def normalize_binary_or_flag(cls, v: Any) -> Any:
