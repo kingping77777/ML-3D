@@ -166,6 +166,8 @@ export default function Step7DashboardPage() {
               error={error}
               selectedVessel={active3DVessel}
               onSelectVessel={handleSelect3DVessel}
+              patient={patient}
+              analysis={analysis}
               height="520px"
             />
           </div>
@@ -189,6 +191,7 @@ export default function Step7DashboardPage() {
           analysis={analysis}
           selectedTarget={selectedTarget}
           onSelectTarget={setSelectedTarget}
+          patient={patient}
         />
 
         {/* Clinical Disclaimer */}

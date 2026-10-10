@@ -7,7 +7,9 @@ import { PredictionResponse, VesselName } from '../../types/predictions';
 import { HeartModel } from './HeartModel';
 import { HeartControls } from './HeartControls';
 import { PvcDetailsCard } from './PvcDetailsCard';
+import { HeartAnatomyModal } from './HeartAnatomyModal';
 import { pvcOrigins } from './pvcOrigins';
+import { PatientInput, AnalyzeResponse } from '../../types/predictions';
 
 interface HeartViewerProps {
   data: PredictionResponse | null;
@@ -16,6 +18,8 @@ interface HeartViewerProps {
   selectedVessel?: VesselName | null;
   onSelectVessel?: (vessel: VesselName | null) => void;
   height?: string;
+  patient?: PatientInput;
+  analysis?: AnalyzeResponse;
 }
 
 export const HeartViewer: React.FC<HeartViewerProps> = ({
@@ -24,13 +28,16 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
   error = null,
   selectedVessel: externalSelectedVessel,
   onSelectVessel: externalOnSelectVessel,
-  height = '500px'
+  height = '500px',
+  patient,
+  analysis
 }) => {
   const [mounted, setMounted] = useState<boolean>(false);
   const [internalSelectedVessel, setInternalSelectedVessel] = useState<VesselName | null>(null);
   const [selectedPvcOrigin, setSelectedPvcOrigin] = useState<string | null>(null);
-  const [showPvcHotspots, setShowPvcHotspots] = useState<boolean>(true);
+  const [showPvcHotspots, setShowPvcHotspots] = useState<boolean>(false);
   const [enableHeartbeat, setEnableHeartbeat] = useState<boolean>(true);
+  const [isAnatomyModalOpen, setIsAnatomyModalOpen] = useState<boolean>(false);
 
   const controlsRef = useRef<any>(null);
 
@@ -53,6 +60,18 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
   };
 
   const activeSelectedVessel = externalSelectedVessel !== undefined ? externalSelectedVessel : internalSelectedVessel;
+  
+  // Auto-focus camera on the selected vessel's anatomical damage region
+  useEffect(() => {
+    if (activeSelectedVessel === 'lad') {
+      handleSetCameraPreset('anterior');
+    } else if (activeSelectedVessel === 'lcx') {
+      handleSetCameraPreset('lcx');
+    } else if (activeSelectedVessel === 'rca') {
+      handleSetCameraPreset('rca');
+    }
+  }, [activeSelectedVessel]);
+
   const handleSelectVessel = (vessel: VesselName | null) => {
     if (externalOnSelectVessel) {
       externalOnSelectVessel(vessel);
@@ -118,6 +137,54 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
         border: '1px solid #27272a',
         overflow: 'hidden'
       }}>
+        {/* Prominent Floating Action to Open Full 3D Anatomy Explorer Modal */}
+        <div style={{
+          position: 'absolute',
+          top: '12px',
+          right: '12px',
+          zIndex: 10
+        }}>
+          <button
+            onClick={() => setIsAnatomyModalOpen(true)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+              color: '#ffffff',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 4px 14px rgba(2, 132, 199, 0.4)',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <span>🔍</span> Full 3D Anatomy & Disease Explorer
+          </button>
+        </div>
+
+        {/* Quick helper badge on bottom left */}
+        <div style={{
+          position: 'absolute',
+          bottom: '12px',
+          left: '12px',
+          zIndex: 10,
+          background: 'rgba(9, 9, 11, 0.85)',
+          border: '1px solid #27272a',
+          padding: '4px 10px',
+          borderRadius: '6px',
+          fontSize: '0.72rem',
+          color: '#cbd5e1',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px'
+        }}>
+          <span>💡</span> Click anywhere on heart or button above to inspect every part & cure
+        </div>
+
         {loading && (
           <div style={{ position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, color: '#f8fafc', fontSize: '13px', fontWeight: 500 }}>
             Loading model...
@@ -146,7 +213,10 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
                 data={data}
                 selectedVessel={activeSelectedVessel}
                 selectedPvcOrigin={selectedPvcOrigin}
-                onSelectVessel={handleSelectVessel}
+                onSelectVessel={(v) => {
+                  handleSelectVessel(v);
+                  setIsAnatomyModalOpen(true);
+                }}
                 onSelectPvcOrigin={(id) => setSelectedPvcOrigin(id)}
                 onHoverVessel={() => {}}
                 enableHeartbeat={enableHeartbeat}
@@ -173,6 +243,15 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
           onClose={() => setSelectedPvcOrigin(null)}
         />
       )}
+
+      {/* Full 3D Heart Anatomy & Pathology Explorer Modal */}
+      <HeartAnatomyModal
+        isOpen={isAnatomyModalOpen}
+        onClose={() => setIsAnatomyModalOpen(false)}
+        patient={patient}
+        analysis={analysis}
+        initialPartId={activeSelectedVessel || 'lad'}
+      />
     </div>
   );
 };

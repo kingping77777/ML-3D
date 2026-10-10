@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { PatientInput } from '../../types/predictions';
 import { CLINICAL_PRESETS } from '../../utils/casePresets';
+import { validatePatientClinicalInputs, CLINICAL_BOUNDS } from '../../utils/clinicalValidation';
 
 interface PatientInputFormProps {
   patient: PatientInput;
@@ -26,6 +27,55 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
   onRandomize
 }) => {
   const [activeTab, setActiveTab] = useState<TabType>('symptoms');
+
+  const validationErrors = validatePatientClinicalInputs(patient);
+  const hasErrors = validationErrors.length > 0;
+
+  const renderInputField = (
+    field: keyof PatientInput,
+    label: string,
+    unit: string
+  ) => {
+    const bound = CLINICAL_BOUNDS[field];
+    const err = validationErrors.find((e) => e.field === field);
+    const isInvalid = Boolean(err);
+
+    return (
+      <div style={{
+        background: isInvalid ? 'rgba(239, 68, 68, 0.12)' : '#18181b',
+        padding: '10px',
+        borderRadius: '8px',
+        border: isInvalid ? '1px solid #ef4444' : '1px solid #27272a',
+        transition: 'all 0.15s ease'
+      }}>
+        <label style={{ display: 'block', fontSize: '0.75rem', color: isInvalid ? '#fca5a5' : '#94a3b8', marginBottom: '4px', fontWeight: isInvalid ? 700 : 500 }}>
+          {label}
+        </label>
+        <input
+          type="number"
+          value={(patient as any)[field]}
+          onChange={(e) => onUpdateField(field, Number(e.target.value))}
+          style={{
+            width: '100%',
+            background: '#000000',
+            border: isInvalid ? '2px solid #ef4444' : '1px solid #27272a',
+            color: isInvalid ? '#f87171' : '#f8fafc',
+            padding: '6px 8px',
+            borderRadius: '6px',
+            fontSize: '0.85rem',
+            fontWeight: isInvalid ? 700 : 400
+          }}
+        />
+        {isInvalid ? (
+          <span style={{ fontSize: '0.68rem', color: '#ef4444', fontWeight: 700, display: 'block', marginTop: '4px' }}>
+            ⚠️ This cannot be possible! ({err?.allowedRange})
+          </span>
+        ) : (
+          <span style={{ fontSize: '0.65rem', color: '#71717a' }}>{unit}</span>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div style={{
@@ -101,6 +151,29 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
           )}
         </div>
       </div>
+
+      {/* Validation Alert Banner */}
+      {hasErrors && (
+        <div style={{
+          background: 'rgba(239, 68, 68, 0.15)',
+          border: '1px solid #ef4444',
+          borderRadius: '10px',
+          padding: '12px 14px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '6px',
+          color: '#fca5a5'
+        }}>
+          <div style={{ fontWeight: 800, fontSize: '0.82rem', color: '#f87171', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            ⛔ THIS CANNOT BE POSSIBLE — INVALID CLINICAL INPUT
+          </div>
+          {validationErrors.map((err, idx) => (
+            <div key={idx} style={{ fontSize: '0.75rem', lineHeight: 1.4 }}>
+              ❌ <strong>{err.message}</strong>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* 2. Category Tabs */}
       <div style={{ display: 'flex', borderBottom: '1px solid #27272a', gap: '4px' }}>
@@ -233,8 +306,8 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
               </div>
               <input
                 type="range"
-                min="20"
-                max="75"
+                min="10"
+                max="90"
                 value={patient.EF_TTE}
                 onChange={(e) => onUpdateField('EF_TTE', Number(e.target.value))}
                 style={{ width: '100%', accentColor: '#38bdf8' }}
@@ -293,74 +366,17 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
         {/* TAB: Labs & Biomarkers */}
         {activeTab === 'labs' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>
-                Fasting Blood Sugar (FBS)
-              </label>
-              <input
-                type="number"
-                value={patient.FBS}
-                onChange={(e) => onUpdateField('FBS', Number(e.target.value))}
-                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
-              />
-              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mg/dL (Normal &lt;100)</span>
-            </div>
-
-            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>
-                LDL Cholesterol
-              </label>
-              <input
-                type="number"
-                value={patient.LDL}
-                onChange={(e) => onUpdateField('LDL', Number(e.target.value))}
-                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
-              />
-              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mg/dL (Target &lt;100)</span>
-            </div>
-
-            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>
-                HDL Cholesterol
-              </label>
-              <input
-                type="number"
-                value={patient.HDL}
-                onChange={(e) => onUpdateField('HDL', Number(e.target.value))}
-                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
-              />
-              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mg/dL (Target &gt;40/50)</span>
-            </div>
-
-            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>
-                Triglycerides (TG)
-              </label>
-              <input
-                type="number"
-                value={patient.TG}
-                onChange={(e) => onUpdateField('TG', Number(e.target.value))}
-                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
-              />
-              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mg/dL (Normal &lt;150)</span>
-            </div>
+            {renderInputField('FBS', 'Fasting Blood Sugar (FBS)', 'mg/dL (Normal <100)')}
+            {renderInputField('LDL', 'LDL Cholesterol', 'mg/dL (Target <100)')}
+            {renderInputField('HDL', 'HDL Cholesterol', 'mg/dL (Target >40)')}
+            {renderInputField('TG', 'Triglycerides (TG)', 'mg/dL (Normal <150)')}
           </div>
         )}
 
         {/* TAB: Demographics & Vitals */}
         {activeTab === 'demographics' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Age (Years)</label>
-              <input
-                type="number"
-                value={patient.Age}
-                min="20"
-                max="95"
-                onChange={(e) => onUpdateField('Age', Number(e.target.value))}
-                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
-              />
-            </div>
+            {renderInputField('Age', 'Age (Years)', 'Years (1 to 120)')}
 
             <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Biological Sex</label>
@@ -374,27 +390,8 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
               </select>
             </div>
 
-            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Systolic Blood Pressure</label>
-              <input
-                type="number"
-                value={patient.BP}
-                onChange={(e) => onUpdateField('BP', Number(e.target.value))}
-                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
-              />
-              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>mmHg</span>
-            </div>
-
-            <div style={{ background: '#18181b', padding: '10px', borderRadius: '8px', border: '1px solid #27272a' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Pulse Rate (PR)</label>
-              <input
-                type="number"
-                value={patient.PR}
-                onChange={(e) => onUpdateField('PR', Number(e.target.value))}
-                style={{ width: '100%', background: '#000000', border: '1px solid #27272a', color: '#f8fafc', padding: '6px 8px', borderRadius: '6px', fontSize: '0.85rem' }}
-              />
-              <span style={{ fontSize: '0.65rem', color: '#71717a' }}>bpm</span>
-            </div>
+            {renderInputField('BP', 'Systolic Blood Pressure', 'mmHg (50 to 300)')}
+            {renderInputField('PR', 'Pulse Rate (PR)', 'bpm (30 to 250)')}
           </div>
         )}
       </div>
@@ -402,26 +399,35 @@ export const PatientInputForm: React.FC<PatientInputFormProps> = ({
       {/* 4. Action Button */}
       <button
         onClick={onRunAnalysis}
-        disabled={loading}
+        disabled={loading || hasErrors}
         style={{
           marginTop: '4px',
           padding: '12px',
-          background: loading ? '#27272a' : 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+          background: hasErrors
+            ? '#3f3f46'
+            : loading
+            ? '#27272a'
+            : 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
           border: 'none',
           borderRadius: '10px',
-          color: '#f8fafc',
+          color: hasErrors ? '#a1a1aa' : '#f8fafc',
           fontWeight: 700,
           fontSize: '0.9rem',
-          cursor: loading ? 'not-allowed' : 'pointer',
+          cursor: (loading || hasErrors) ? 'not-allowed' : 'pointer',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           gap: '8px',
-          boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)'
+          boxShadow: hasErrors ? 'none' : '0 4px 12px rgba(2, 132, 199, 0.3)'
         }}
       >
-        {loading ? '⏳ Computing ML & SHAP Analysis...' : '⚡ Re-compute CAD & Vessel Risk'}
+        {hasErrors
+          ? '⛔ Cannot Compute — Fix Invalid Input Values Above'
+          : loading
+          ? '⏳ Computing ML & SHAP Analysis...'
+          : '⚡ Re-compute CAD & Vessel Risk'}
       </button>
     </div>
   );
 };
+

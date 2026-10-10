@@ -153,6 +153,8 @@ export function useCardioVision(apiUrl = 'http://127.0.0.1:8000/api/v1/analyze')
     setPatient(newPatient);
   }, [patient]);
 
+  const activeControllerRef = useRef<AbortController | null>(null);
+
   // Execute patient inference
   const runAnalysis = useCallback(async (currentPatient: PatientInput = patient) => {
     setLoading(true);
@@ -167,17 +169,47 @@ export function useCardioVision(apiUrl = 'http://127.0.0.1:8000/api/v1/analyze')
       return;
     }
 
+    if (activeControllerRef.current) {
+      activeControllerRef.current.abort('New analysis initiated');
+    }
+
+    const controller = new AbortController();
+    activeControllerRef.current = controller;
+    const timeoutId = setTimeout(() => {
+      try {
+        controller.abort('Analysis request timed out');
+      } catch {}
+    }, 30000);
+
     try {
       const sanitizedPatient = sanitizePatientInput(currentPatient);
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 8000);
+      let targetUrl = apiUrl;
+      let response: Response;
 
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(sanitizedPatient),
-        signal: controller.signal
-      });
+      try {
+        response = await fetch(targetUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(sanitizedPatient),
+          signal: controller.signal
+        });
+      } catch (firstErr: any) {
+        if (firstErr?.name === 'AbortError' || firstErr?.message?.toLowerCase().includes('abort')) {
+          return;
+        }
+
+        // Fallback to localhost if 127.0.0.1 fails or vice-versa
+        const altUrl = targetUrl.includes('127.0.0.1')
+          ? targetUrl.replace('127.0.0.1', 'localhost')
+          : targetUrl.replace('localhost', '127.0.0.1');
+
+        response = await fetch(altUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(sanitizedPatient),
+          signal: controller.signal
+        });
+      }
 
       clearTimeout(timeoutId);
 
@@ -194,19 +226,21 @@ export function useCardioVision(apiUrl = 'http://127.0.0.1:8000/api/v1/analyze')
       setBackendOnline(true);
       setError(null);
     } catch (err: any) {
-      // If validation or connection issue occurs, perform seamless client-side inference without jarring errors
+      if (err?.name === 'AbortError' || err?.message?.toLowerCase().includes('abort')) {
+        return;
+      }
+
       const mockResult = getMockAnalysisForPatient(currentPatient);
       setAnalysis(mockResult);
       setBackendOnline(false);
       
-      if (err?.name === 'AbortError') {
-        setError('Inference running in offline fallback mode.');
-      } else if (err?.message && !err.message.includes('Failed to fetch')) {
+      if (err?.message && !err.message.includes('Failed to fetch')) {
         setError(err.message);
       } else {
         setError(null);
       }
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   }, [apiUrl, isMock, patient]);
@@ -217,7 +251,7 @@ export function useCardioVision(apiUrl = 'http://127.0.0.1:8000/api/v1/analyze')
     async function init() {
       const healthUrl = apiUrl.replace(/\/analyze$/, '/health');
       try {
-        const res = await fetch(healthUrl, { signal: AbortSignal.timeout(3000) });
+        const res = await fetch(healthUrl);
         if (!cancelled && res.ok) {
           setBackendOnline(true);
         }
@@ -229,7 +263,14 @@ export function useCardioVision(apiUrl = 'http://127.0.0.1:8000/api/v1/analyze')
       }
     }
     init();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+      if (activeControllerRef.current) {
+        try {
+          activeControllerRef.current.abort('Component unmounted');
+        } catch {}
+      }
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

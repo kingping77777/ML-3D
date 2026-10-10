@@ -252,7 +252,8 @@ def explain_patient(target_name, model_obj, patient_row_df, X_raw_df, raw_featur
     clf_type = type(clf).__name__
     
     if "LogisticRegression" in clf_type:
-        explainer = shap.LinearExplainer(clf, preprocessor.transform(X_raw_df))
+        bg_data = preprocessor.transform(X_raw_df.head(20)) if len(X_raw_df) > 20 else preprocessor.transform(X_raw_df)
+        explainer = shap.LinearExplainer(clf, bg_data)
         raw_shap = explainer.shap_values(X_trans_patient)
         base_val = float(explainer.expected_value)
         explainer_name = "LinearExplainer"
@@ -263,7 +264,6 @@ def explain_patient(target_name, model_obj, patient_row_df, X_raw_df, raw_featur
         base_val = float(b_val[1]) if isinstance(b_val, (list, np.ndarray)) else float(b_val)
         explainer_name = "TreeExplainer"
     else:
-        # Fallback: try TreeExplainer first before resorting to KernelExplainer
         try:
             explainer = shap.TreeExplainer(clf)
             raw_shap = explainer.shap_values(X_trans_patient)
@@ -271,8 +271,8 @@ def explain_patient(target_name, model_obj, patient_row_df, X_raw_df, raw_featur
             base_val = float(b_val[1]) if isinstance(b_val, (list, np.ndarray)) else float(b_val)
             explainer_name = "TreeExplainer"
         except Exception:
-            bg_summary = shap.kmeans(preprocessor.transform(X_raw_df), 10)
-            explainer = shap.KernelExplainer(clf.predict_proba, bg_summary)
+            bg_data = preprocessor.transform(X_raw_df.head(10)) if len(X_raw_df) > 10 else preprocessor.transform(X_raw_df)
+            explainer = shap.KernelExplainer(clf.predict_proba, bg_data)
             raw_shap = explainer.shap_values(X_trans_patient)
             b_val = explainer.expected_value
             base_val = float(b_val[1]) if isinstance(b_val, (list, np.ndarray)) else float(b_val)

@@ -29,7 +29,7 @@ function GLTFHeartModel({
   onSelectVessel,
   onSelectPvcOrigin,
   enableHeartbeat = true,
-  showPvcHotspots = true
+  showPvcHotspots = false
 }: HeartModelProps) {
   const { scene } = useGLTF('/models/cardiac_anatomy_external_view_of_human_heart.glb');
   const groupRef = useRef<THREE.Group>(null);
