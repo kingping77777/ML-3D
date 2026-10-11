@@ -11,7 +11,7 @@ function sanitizePatientInput(p: PatientInput): PatientInput {
     return Math.max(min, Math.min(max, num));
   };
 
-  const sanitizeBinary = (val: any, defaultVal: number = 0): number => {
+  const sanitizeBinary = (val: any, defaultVal: 0 | 1 = 0): 0 | 1 => {
     if (typeof val === 'string') {
       const v = val.trim().toUpperCase();
       if (['Y', 'YES', '1', 'TRUE'].includes(v)) return 1;
@@ -22,24 +22,25 @@ function sanitizePatientInput(p: PatientInput): PatientInput {
     return defaultVal;
   };
 
-  const sanitizeSex = (val: any): string => {
+  const sanitizeSex = (val: any): 'Male' | 'Fmale' | 'Female' => {
     if (typeof val === 'string') {
       const v = val.trim().toLowerCase();
       if (v === 'female' || v === 'f') return 'Female';
+      if (v === 'fmale') return 'Fmale';
       if (v === 'male' || v === 'm') return 'Male';
     }
     return 'Male';
   };
 
-  const sanitizeBbb = (val: any): string => {
+  const sanitizeBbb = (val: any): 'N' | 'LBBB' | 'RBBB' => {
     if (typeof val === 'string') {
       const v = val.trim().toUpperCase();
-      if (['LBBB', 'RBBB'].includes(v)) return v;
+      if (v === 'LBBB' || v === 'RBBB') return v;
     }
     return 'N';
   };
 
-  const sanitizeVhd = (val: any): string => {
+  const sanitizeVhd = (val: any): 'N' | 'mild' | 'Moderate' | 'Severe' => {
     if (typeof val === 'string') {
       const v = val.trim().toLowerCase();
       if (v === 'mild') return 'mild';
@@ -81,7 +82,6 @@ function sanitizePatientInput(p: PatientInput): PatientInput {
     Typical_Chest_Pain: sanitizeBinary(p.Typical_Chest_Pain),
     Atypical: sanitizeBinary(p.Atypical),
     Nonanginal: sanitizeBinary(p.Nonanginal),
-    Exertional_CP: sanitizeBinary(p.Exertional_CP),
     LowTH_Ang: sanitizeBinary(p.LowTH_Ang),
     Q_Wave: sanitizeBinary(p.Q_Wave),
     St_Elevation: sanitizeBinary(p.St_Elevation),
