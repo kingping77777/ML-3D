@@ -70,7 +70,7 @@ function GLTFHeartModel({
     <group ref={groupRef} scale={[computedScale, computedScale, computedScale]}>
       <primitive
         object={clonedScene}
-        onClick={(e: THREE.Event) => {
+        onClick={(e: any) => {
           e.stopPropagation();
           const meshName = e.object.name.toLowerCase();
           if (meshName.includes('lad') || meshName.includes('anterior_descending')) {

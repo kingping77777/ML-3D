@@ -30,7 +30,20 @@ const DEFAULT_PATIENT_PAYLOAD: PatientInput = {
   Tinversion: 0, Region_RWMA: 0
 };
 
-export function usePredictions(apiUrl = 'http://localhost:8000/api/v1/predict') {
+function resolvePredictApiUrl(): string {
+  if (typeof process !== 'undefined' && process.env?.BACKEND_URL) {
+    return `${process.env.BACKEND_URL}/api/v1/predict`;
+  }
+  if (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_API_BASE_URL) {
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/predict`;
+  }
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return '/api/v1/predict';
+  }
+  return 'http://localhost:8000/api/v1/predict';
+}
+
+export function usePredictions(apiUrl = resolvePredictApiUrl()) {
   const [data, setData] = useState<PredictionResponse | null>(MOCK_PREDICTION_DATA);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);

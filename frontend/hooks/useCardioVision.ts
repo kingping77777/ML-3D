@@ -92,7 +92,20 @@ function sanitizePatientInput(p: PatientInput): PatientInput {
   };
 }
 
-export function useCardioVision(apiUrl = 'http://127.0.0.1:8000/api/v1/analyze') {
+function resolveAnalyzeApiUrl(): string {
+  if (typeof process !== 'undefined' && process.env?.BACKEND_URL) {
+    return `${process.env.BACKEND_URL}/api/v1/analyze`;
+  }
+  if (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_API_BASE_URL) {
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/analyze`;
+  }
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return '/api/v1/analyze';
+  }
+  return 'http://127.0.0.1:8000/api/v1/analyze';
+}
+
+export function useCardioVision(apiUrl = resolveAnalyzeApiUrl()) {
   const [selectedPresetId, setSelectedPresetId] = useState<string>('case_multivessel');
   const [patient, setPatient] = useState<PatientInput>(CLINICAL_PRESETS[0].data);
   const [selectedTarget, setSelectedTarget] = useState<TargetName>('cad');

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Html } from '@react-three/drei';
 import { PredictionResponse, VesselName } from '../../types/predictions';
 import { HeartModel } from './HeartModel';
 import { HeartControls } from './HeartControls';
@@ -208,7 +208,13 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
             <directionalLight position={[5, 8, 5]} intensity={1.2} />
             <directionalLight position={[-5, 3, -5]} intensity={0.6} />
 
-            <Suspense fallback={null}>
+            <Suspense fallback={
+              <Html center>
+                <div style={{ color: '#38bdf8', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                  🫀 Loading 3D Heart Model...
+                </div>
+              </Html>
+            }>
               <HeartModel
                 data={data}
                 selectedVessel={activeSelectedVessel}
