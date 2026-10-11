@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import { HEART_ANATOMICAL_PARTS, HeartAnatomicalPart } from './heartAnatomyData';
 import { PatientInput, AnalyzeResponse } from '../../types/predictions';
 import { getDynamicPartStatus, getPatientSymptomMedicineConnections, SymptomMedicinePair } from './patientSymptomMedicine';
+import { ErrorBoundary } from '../common/ErrorBoundary';
 
 interface HeartAnatomyModalProps {
   isOpen: boolean;
@@ -350,31 +351,33 @@ export const HeartAnatomyModal: React.FC<HeartAnatomyModalProps> = ({
 
             {/* 3D Canvas */}
             <div style={{ flex: 1, width: '100%', height: '100%' }}>
-              <Canvas
-                camera={{ position: [0, 0, 3.8], fov: 45 }}
-                gl={{ antialias: true }}
-              >
-                <ambientLight intensity={1.2} />
-                <directionalLight position={[5, 8, 5]} intensity={1.4} />
-                <directionalLight position={[-5, 3, -5]} intensity={0.8} />
+              <ErrorBoundary fallbackTitle="Anatomy 3D Explorer" fallbackMessage="3D viewport could not initialize.">
+                <Canvas
+                  camera={{ position: [0, 0, 3.8], fov: 45 }}
+                  gl={{ antialias: true }}
+                >
+                  <ambientLight intensity={1.2} />
+                  <directionalLight position={[5, 8, 5]} intensity={1.4} />
+                  <directionalLight position={[-5, 3, -5]} intensity={0.8} />
 
-                <Suspense fallback={null}>
-                  <Minimalist3DHeart
-                    selectedPart={selectedPart}
-                    customColor={dynamicStatus.color}
-                    enableHeartbeat={enableHeartbeat}
+                  <Suspense fallback={null}>
+                    <Minimalist3DHeart
+                      selectedPart={selectedPart}
+                      customColor={dynamicStatus.color}
+                      enableHeartbeat={enableHeartbeat}
+                    />
+                  </Suspense>
+
+                  <OrbitControls
+                    ref={controlsRef}
+                    enablePan={true}
+                    enableZoom={true}
+                    enableRotate={true}
+                    minDistance={1.8}
+                    maxDistance={6.0}
                   />
-                </Suspense>
-
-                <OrbitControls
-                  ref={controlsRef}
-                  enablePan={true}
-                  enableZoom={true}
-                  enableRotate={true}
-                  minDistance={1.8}
-                  maxDistance={6.0}
-                />
-              </Canvas>
+                </Canvas>
+              </ErrorBoundary>
             </div>
 
             {/* Bottom Helper Bar */}

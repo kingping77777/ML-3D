@@ -10,6 +10,7 @@ import { PvcDetailsCard } from './PvcDetailsCard';
 import { HeartAnatomyModal } from './HeartAnatomyModal';
 import { pvcOrigins } from './pvcOrigins';
 import { PatientInput, AnalyzeResponse } from '../../types/predictions';
+import { ErrorBoundary } from '../common/ErrorBoundary';
 
 interface HeartViewerProps {
   data: PredictionResponse | null;
@@ -198,47 +199,49 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
         )}
 
         {data && (
-          <Canvas
-            camera={{ position: [0, 0, 4.0], fov: 45 }}
-            gl={{ antialias: true }}
-            onPointerMissed={() => handleSelectVessel(null)}
-          >
-            {/* Natural White Studio Illumination */}
-            <ambientLight intensity={1.1} />
-            <directionalLight position={[5, 8, 5]} intensity={1.2} />
-            <directionalLight position={[-5, 3, -5]} intensity={0.6} />
+          <ErrorBoundary fallbackTitle="3D Scene Engine" fallbackMessage="WebGL 3D canvas could not be initialized or is loading assets.">
+            <Canvas
+              camera={{ position: [0, 0, 4.0], fov: 45 }}
+              gl={{ antialias: true }}
+              onPointerMissed={() => handleSelectVessel(null)}
+            >
+              {/* Natural White Studio Illumination */}
+              <ambientLight intensity={1.1} />
+              <directionalLight position={[5, 8, 5]} intensity={1.2} />
+              <directionalLight position={[-5, 3, -5]} intensity={0.6} />
 
-            <Suspense fallback={
-              <Html center>
-                <div style={{ color: '#38bdf8', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                  🫀 Loading 3D Heart Model...
-                </div>
-              </Html>
-            }>
-              <HeartModel
-                data={data}
-                selectedVessel={activeSelectedVessel}
-                selectedPvcOrigin={selectedPvcOrigin}
-                onSelectVessel={(v) => {
-                  handleSelectVessel(v);
-                  setIsAnatomyModalOpen(true);
-                }}
-                onSelectPvcOrigin={(id) => setSelectedPvcOrigin(id)}
-                onHoverVessel={() => {}}
-                enableHeartbeat={enableHeartbeat}
-                showPvcHotspots={showPvcHotspots}
+              <Suspense fallback={
+                <Html center>
+                  <div style={{ color: '#38bdf8', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                    🫀 Loading 3D Heart Model...
+                  </div>
+                </Html>
+              }>
+                <HeartModel
+                  data={data}
+                  selectedVessel={activeSelectedVessel}
+                  selectedPvcOrigin={selectedPvcOrigin}
+                  onSelectVessel={(v) => {
+                    handleSelectVessel(v);
+                    setIsAnatomyModalOpen(true);
+                  }}
+                  onSelectPvcOrigin={(id) => setSelectedPvcOrigin(id)}
+                  onHoverVessel={() => {}}
+                  enableHeartbeat={enableHeartbeat}
+                  showPvcHotspots={showPvcHotspots}
+                />
+              </Suspense>
+
+              <OrbitControls
+                ref={controlsRef}
+                enablePan={true}
+                enableZoom={true}
+                enableRotate={true}
+                minDistance={2.0}
+                maxDistance={8.0}
               />
-            </Suspense>
-
-            <OrbitControls
-              ref={controlsRef}
-              enablePan={true}
-              enableZoom={true}
-              enableRotate={true}
-              minDistance={2.0}
-              maxDistance={8.0}
-            />
-          </Canvas>
+            </Canvas>
+          </ErrorBoundary>
         )}
       </div>
 

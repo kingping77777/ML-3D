@@ -7,6 +7,7 @@ import { PatientInputForm } from '../components/dashboard/PatientInputForm';
 import { VesselRiskCards } from '../components/dashboard/VesselRiskCards';
 import { AnatomicalExplanationCard } from '../components/dashboard/AnatomicalExplanationCard';
 import { VesselName, TargetName, PredictionResponse } from '../types/predictions';
+import { ErrorBoundary } from '../components/common/ErrorBoundary';
 
 const HeartViewer = dynamic(
   () => import('../components/heart/HeartViewer').then((mod) => mod.HeartViewer),
@@ -160,16 +161,18 @@ export default function Step7DashboardPage() {
               </span>
             </div>
 
-            <HeartViewer
-              data={heartPredictionData}
-              loading={loading}
-              error={error}
-              selectedVessel={active3DVessel}
-              onSelectVessel={handleSelect3DVessel}
-              patient={patient}
-              analysis={analysis}
-              height="520px"
-            />
+            <ErrorBoundary fallbackTitle="3D Cardiac Anatomy Viewer" fallbackMessage="3D rendering will initialize shortly or WebGL context is being restored.">
+              <HeartViewer
+                data={heartPredictionData}
+                loading={loading}
+                error={error}
+                selectedVessel={active3DVessel}
+                onSelectVessel={handleSelect3DVessel}
+                patient={patient}
+                analysis={analysis}
+                height="520px"
+              />
+            </ErrorBoundary>
           </div>
 
           {/* Right: Clinical Information & Patient Profile Form */}
