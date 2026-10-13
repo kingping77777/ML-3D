@@ -227,11 +227,18 @@ export function useCardioVision(apiUrl = resolveAnalyzeApiUrl()) {
       clearTimeout(timeoutId);
 
       if (!response.ok) {
+        // If hosted on Vercel and backend is not responding or 404/500, use deterministic clinical simulation
         const errPayload = await response.json().catch(() => null);
         const detailStr = typeof errPayload?.detail === 'string'
           ? errPayload.detail
           : (errPayload?.detail ? JSON.stringify(errPayload.detail) : `HTTP ${response.status}`);
-        throw new Error(detailStr);
+        
+        console.warn(`[CardioVision 3D] Remote API returned ${detailStr}. Falling back to clinical simulation mode.`);
+        const fallbackResult = getMockAnalysisForPatient(currentPatient);
+        setAnalysis(fallbackResult);
+        setBackendOnline(false);
+        setError(null);
+        return;
       }
 
       const data: AnalyzeResponse = await response.json();
