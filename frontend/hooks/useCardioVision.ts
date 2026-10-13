@@ -102,7 +102,7 @@ function resolveAnalyzeApiUrl(): string {
   if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
     return '/api/v1/analyze';
   }
-  return 'http://127.0.0.1:8000/api/v1/analyze';
+  return 'http://localhost:8000/api/v1/analyze';
 }
 
 export function useCardioVision(apiUrl = resolveAnalyzeApiUrl()) {
@@ -246,12 +246,9 @@ export function useCardioVision(apiUrl = resolveAnalyzeApiUrl()) {
       const mockResult = getMockAnalysisForPatient(currentPatient);
       setAnalysis(mockResult);
       setBackendOnline(false);
-      
-      if (err?.message && !err.message.includes('Failed to fetch')) {
-        setError(err.message);
-      } else {
-        setError(null);
-      }
+      // Log for diagnostic purposes without breaking the 3D heart canvas
+      console.warn('Backend inference notice:', err?.message);
+      setError(null);
     } finally {
       clearTimeout(timeoutId);
       setLoading(false);

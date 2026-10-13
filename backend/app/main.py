@@ -67,13 +67,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Custom Exception Handler to prevent exposing stack traces
+# Custom Exception Handler to return the exact error message
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled error handling request {request.method} {request.url.path}: {str(exc)}", exc_info=True)
     return JSONResponse(
         status_code=500,
-        content={"detail": "An internal server error occurred."}
+        content={"detail": f"{type(exc).__name__}: {str(exc)}"}
     )
 
 # Include API Routers under /api/v1

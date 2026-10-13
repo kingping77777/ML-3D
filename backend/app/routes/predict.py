@@ -33,7 +33,7 @@ def predict_patient(
         logger.error(f"Inference error in POST /predict: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="An internal error occurred during model inference."
+            detail=f"Inference error: {type(e).__name__}: {str(e)}"
         )
 
 @router.post("/analyze", response_model=AnalyzeResponse, summary="Combined Prediction & SHAP Explanation Analysis")
@@ -67,5 +67,5 @@ def analyze_patient(
         logger.error(f"Error in POST /analyze: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="An internal error occurred during full patient analysis."
+            detail=f"Analysis error: {type(e).__name__}: {str(e)}"
         )

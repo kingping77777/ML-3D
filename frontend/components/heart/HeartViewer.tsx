@@ -193,8 +193,8 @@ export const HeartViewer: React.FC<HeartViewerProps> = ({
         )}
 
         {error && !loading && (
-          <div style={{ position: 'absolute', inset: 0, background: '#fef2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, padding: '16px', color: '#b91c1c', fontSize: '13px' }}>
-            {error}
+          <div style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(239, 68, 68, 0.9)', borderRadius: '6px', padding: '6px 12px', zIndex: 20, color: '#ffffff', fontSize: '12px', fontWeight: 500, boxShadow: '0 2px 8px rgba(0,0,0,0.4)', maxWidth: '300px' }}>
+            ⚠️ {error}
           </div>
         )}
 
